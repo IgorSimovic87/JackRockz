@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">JackRockz</string>
+    <string name="logo_text">Gives your friends discounts</string>
+    <string name="facebook_button_title">Login with Facebook</string>
+    <string name="title_country_selection">Where are you from?</string>
+    <string name="title_city_selection">Your Destination</string>
+    <string name="title_arrival_date">Let Jack know when you are\narriving and leaving</string>
+    <string name="arrival_date">Arrival Date</string>
+    <string name="departure_date">Departure Date</string>
+    <string name="btn_next">Next</string>
+</resources>
