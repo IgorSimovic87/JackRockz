@@ -14,4 +14,7 @@
     <string name="nav_enter_ambassador_code">Enter Ambassador Code</string>
     <string name="nav_logout">Logout</string>
     <string name="title_profile">John Appleseed</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

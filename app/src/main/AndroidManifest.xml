@@ -16,8 +16,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".root.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".root.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".root.ambassador.AmbassadorActivity" />
+        <activity android:name=".root.events.EventDetailActivity" />
+        <activity android:name=".root.events.EventPaymentActivity" />
+        <activity android:name=".root.tickets.TicketDetailActivity"></activity>
     </application>
 
 </manifest>
