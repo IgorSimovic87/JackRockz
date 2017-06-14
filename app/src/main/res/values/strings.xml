@@ -8,4 +8,10 @@
     <string name="arrival_date">Arrival Date</string>
     <string name="departure_date">Departure Date</string>
     <string name="btn_next">Next</string>
+    <string name="nav_events">Events</string>
+    <string name="nav_my_tickets">My Tickets</string>
+    <string name="nav_support">Support</string>
+    <string name="nav_enter_ambassador_code">Enter Ambassador Code</string>
+    <string name="nav_logout">Logout</string>
+    <string name="title_profile">John Appleseed</string>
 </resources>
