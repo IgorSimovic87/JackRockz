@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <include layout="@layout/toolbar" />
@@ -78,6 +79,6 @@
         android:textStyle="bold"
         android:gravity="center"
         android:background="@drawable/round_button_background"
-        android:backgroundTint="@color/colorControlNormal"
+        app:backgroundTint="@color/colorControlNormal"
         android:clickable="true"/>
 </LinearLayout>
