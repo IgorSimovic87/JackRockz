@@ -18,9 +18,10 @@
         </activity>
         <activity
             android:name=".root.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar.NoStatus" />
         <activity
             android:name=".root.ambassador.AmbassadorActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:label="Jack"/>
         <activity
             android:name=".root.events.EventDetailActivity"

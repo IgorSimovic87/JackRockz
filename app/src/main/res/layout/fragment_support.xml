@@ -36,6 +36,6 @@
         android:textStyle="bold"
         android:gravity="center"
         android:background="@drawable/round_button_background"
-        android:tint="@color/colorControlNormal"
+        android:backgroundTint="@color/colorControlNormal"
         android:clickable="true"/>
 </LinearLayout>

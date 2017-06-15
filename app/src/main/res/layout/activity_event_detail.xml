@@ -7,7 +7,7 @@
 
     <android.support.v7.widget.AppCompatImageView
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="300dp"
         android:scaleType="fitXY"
         android:src="@drawable/welcome_background1" />
 
@@ -99,19 +99,26 @@
 
     <include layout="@layout/divider" />
 
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/btnGet"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/login_button_height"
-        android:layout_marginLeft="@dimen/gap_super"
-        android:layout_marginRight="@dimen/gap_super"
-        android:layout_marginTop="@dimen/gap_XL"
-        android:text="Get on guestlist"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:background="@drawable/round_button_background"
-        android:tint="@color/colorControlNormal"
-        android:clickable="true"/>
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
 
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/btnGet"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/login_button_height"
+            android:layout_marginLeft="@dimen/gap_super"
+            android:layout_marginRight="@dimen/gap_super"
+            android:layout_marginTop="@dimen/gap_XL"
+            android:layout_centerInParent="true"
+            android:text="Get on guestlist"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:background="@drawable/round_button_background"
+            android:backgroundTint="@color/colorControlNormal"
+            android:clickable="true"/>
+
+    </RelativeLayout>
 </LinearLayout>

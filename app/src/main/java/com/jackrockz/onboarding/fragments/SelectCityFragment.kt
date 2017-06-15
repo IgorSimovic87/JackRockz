@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_select_city.*
 
 
 class SelectCityFragment : Fragment(), View.OnClickListener {
-    val listItems = ArrayList<CityModel>()
+    var listItems = ArrayList<CityModel>()
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater!!.inflate(R.layout.fragment_select_city, container, false)
@@ -26,7 +26,11 @@ class SelectCityFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        listItems = ArrayList<CityModel>()
+
         val city = CityModel(0, "Barcelona", "4534545", "test@test.com", ImageItem("", "", "https://jack-rockz-prod.s3-eu-west-1.amazonaws.com/city/19/3a3f0b3eec53a8e34d0903e509b21bc486ae95bd.jpg", ""))
+        listItems.add(city)
+        listItems.add(city)
         listItems.add(city)
         listItems.add(city)
         listItems.add(city)

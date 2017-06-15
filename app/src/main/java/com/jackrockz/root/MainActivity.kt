@@ -14,6 +14,7 @@ import com.jackrockz.root.events.EventsFragment
 import com.jackrockz.root.support.SupportFragment
 import com.jackrockz.root.tickets.MyTicketsFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.toolbar.*
 
 class MainActivity : AppCompatActivity() {
     @JvmField var navItemIndex = 0
