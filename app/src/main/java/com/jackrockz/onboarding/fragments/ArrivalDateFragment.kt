@@ -21,7 +21,7 @@ class ArrivalDateFragment : Fragment(), View.OnClickListener {
         myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
         updateLabel(if ((view.tag as Int) == R.id.txtArrivalDate) txtArrivalDate else  txtDepartureDate)
     }
-    val myFormat = "dd-MM-YYYY"
+    val myFormat = "dd-MM-yyyy"
     val sdf = SimpleDateFormat(myFormat, Locale.US)
 
 

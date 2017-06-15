@@ -1,9 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.jackrockz.root.ambassador.AmbassadorActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/gap_XL"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:layout_gravity="center_horizontal"
+        android:text="Who is your Jack?"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/gap_XL"
+        android:textSize="17sp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:text="@string/content_ambassador"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/gap_M"
+        android:layout_gravity="center_horizontal">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/gap_S"
+            android:textColor="@color/hint_color"
+            android:textSize="14sp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/hint_ambassador"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/hint_color"
+            android:textSize="14sp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/hint_call"/>
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginLeft="@dimen/gap_XL"
+        android:layout_marginRight="@dimen/gap_XL"
+        android:layout_marginTop="@dimen/gap_XXXL"
+        android:orientation="vertical">
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Code"/>
+
+        <android.support.v7.widget.AppCompatEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/btnContact"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/login_button_height"
+        android:layout_marginBottom="@dimen/gap_big"
+        android:layout_marginLeft="@dimen/gap_super"
+        android:layout_marginRight="@dimen/gap_super"
+        android:text="Validate"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:background="@drawable/round_button_background"
+        android:tint="@color/colorControlNormal"
+        android:clickable="true"/>
+</LinearLayout>

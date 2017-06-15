@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import com.jackrockz.R
+import com.jackrockz.onboarding.fragments.WelcomeFragment
 import com.jackrockz.root.MainActivity
 
 class WelcomeActivity : AppCompatActivity() {
@@ -17,8 +18,8 @@ class WelcomeActivity : AppCompatActivity() {
         supportActionBar!!.hide()
 
         if (savedInstanceState == null) {
-//            changeFragment(WelcomeFragment())
-            gotoNextActivity()
+            changeFragment(WelcomeFragment())
+//            gotoNextActivity()
         }
     }
 
@@ -45,6 +46,7 @@ class WelcomeActivity : AppCompatActivity() {
     fun gotoNextActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
     override fun onBackPressed() {

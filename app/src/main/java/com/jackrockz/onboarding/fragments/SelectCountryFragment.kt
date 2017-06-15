@@ -25,7 +25,7 @@ class SelectCountryFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(v: View) {
         if (v.id in listOf(R.id.btnFrance, R.id.btnGermany, R.id.btnItaly, R.id.btnNetherlands, R.id.btnOther)) {
-            (activity as WelcomeActivity).changeFragment(ArrivalDateFragment())
+            (activity as WelcomeActivity).changeFragment(SelectCityFragment())
         }
     }
 }

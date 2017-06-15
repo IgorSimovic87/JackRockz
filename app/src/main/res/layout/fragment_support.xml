@@ -1,13 +1,41 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.jackrockz.root.support.SupportFragment">
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/gap_super"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:layout_gravity="center_horizontal"
+        android:text="Have a question?"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="@dimen/gap_XL"
+        android:textSize="17sp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:text="@string/content_support"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/btnContact"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-
-</FrameLayout>
+        android:layout_height="@dimen/login_button_height"
+        android:layout_marginBottom="@dimen/gap_big"
+        android:layout_marginLeft="@dimen/gap_super"
+        android:layout_marginRight="@dimen/gap_super"
+        android:text="Contact Jack"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:background="@drawable/round_button_background"
+        android:tint="@color/colorControlNormal"
+        android:clickable="true"/>
+</LinearLayout>

@@ -19,10 +19,18 @@
         <activity
             android:name=".root.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".root.ambassador.AmbassadorActivity" />
-        <activity android:name=".root.events.EventDetailActivity" />
-        <activity android:name=".root.events.EventPaymentActivity" />
-        <activity android:name=".root.tickets.TicketDetailActivity"></activity>
+        <activity
+            android:name=".root.ambassador.AmbassadorActivity"
+            android:label="Jack"/>
+        <activity
+            android:name=".root.events.EventDetailActivity"
+            android:label="Pacha"/>
+        <activity
+            android:name=".root.events.EventPaymentActivity"
+            android:label="Purchase Tickets"/>
+        <activity
+            android:name=".root.tickets.TicketDetailActivity"
+            android:label="Ticket" />
     </application>
 
 </manifest>

@@ -14,7 +14,19 @@
     <string name="nav_enter_ambassador_code">Enter Ambassador Code</string>
     <string name="nav_logout">Logout</string>
     <string name="title_profile">John Appleseed</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="content_support">Jack is here to help you. Jack knows his\nsh*t. Whether you need more info about\nan event, are lost in the streets or just\nwant to tickle his beard…</string>
+    <string name="content_ambassador">Enter the code below that you have\nreceived from your Jack.</string>
+    <string name="hint_ambassador">You didn\'t meet a Jack? </string>
+    <string name="hint_call"><u>Call or message us!</u></string>
+    <string name="content_purchase">You will be redirected to the payment page where you\ncan securely perform the payment using iDeal, Creditcard\nor Paypal.</string>
+
+    <string-array name="nav_item_activity_titles">
+        <item>Events</item>
+        <item>My Tickets</item>
+        <item>Support</item>
+    </string-array>
+
+    <string name="openDrawer">open_drawer</string>
+    <string name="closeDrawer">close_drawer</string>
 </resources>

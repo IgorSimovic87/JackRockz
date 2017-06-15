@@ -35,13 +35,14 @@ class SelectCityFragment : Fragment(), View.OnClickListener {
         recycler_view.apply {
             setHasFixedSize(true)
             val linearLayout = LinearLayoutManager(context)
+            linearLayout.orientation = LinearLayoutManager.VERTICAL
             layoutManager = linearLayout
         }
         recycler_view.adapter = CityAdapter(this, listItems)
     }
 
     override fun onClick(v: View?) {
-        (activity as WelcomeActivity).changeFragment(SelectCityFragment())
+        (activity as WelcomeActivity).changeFragment(ArrivalDateFragment())
     }
 }
 

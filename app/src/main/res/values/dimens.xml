@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="login_button_height">50dp</dimen>
+    <dimen name="login_button_height">45dp</dimen>
     <dimen name="gap_S">5dp</dimen>
     <dimen name="gap_M">10dp</dimen>
     <dimen name="gap_L">15dp</dimen>
