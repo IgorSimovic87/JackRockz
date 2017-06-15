@@ -14,16 +14,22 @@
 
         <!--Edit Text Bottom Color color-->
         <item name="colorControlNormal">@color/colorControlNormal</item>
+
+        <!--EditText Style-->
+        <item name="editTextStyle">@style/My_EditTextStyle</item>
     </style>
 
-    <style name="AppTheme.NoActionBar" parent="AppTheme">
+    <style name="My_EditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:maxLines">1</item>
+        <item name="android:inputType">text</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.NoActionBar.NoStatus" parent="AppTheme.NoActionBar">
-
-    </style>
+    <style name="AppTheme.NoActionBar.NoStatus" />
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
