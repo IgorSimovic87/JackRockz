@@ -15,8 +15,6 @@ class WelcomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_welcome)
 
-        supportActionBar!!.hide()
-
         if (savedInstanceState == null) {
             changeFragment(WelcomeFragment())
 //            gotoNextActivity()
