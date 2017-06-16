@@ -29,4 +29,7 @@
 
     <string name="openDrawer">open_drawer</string>
     <string name="closeDrawer">close_drawer</string>
+
+    <string name="facebook_app_id">1034353110031704</string>
+    <string name="msg_facebook">Unfortunately facebook login failed.</string>
 </resources>

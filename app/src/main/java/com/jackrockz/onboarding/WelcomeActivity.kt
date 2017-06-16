@@ -5,20 +5,47 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
+import android.widget.Toast
+import com.facebook.AccessToken
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import com.jackrockz.R
+import com.jackrockz.onboarding.fragments.SelectCountryFragment
 import com.jackrockz.onboarding.fragments.WelcomeFragment
 import com.jackrockz.root.MainActivity
 
 class WelcomeActivity : AppCompatActivity() {
+    var callbackManager = CallbackManager.Factory.create()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_welcome)
 
-        if (savedInstanceState == null) {
-            changeFragment(WelcomeFragment())
-//            gotoNextActivity()
+        InitFlow()
+    }
+
+    fun InitFlow() {
+        if (AccessToken.getCurrentAccessToken() != null) {
+            gotoNextActivity()
+            return;
         }
+        LoginManager.getInstance().registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
+            override fun onCancel() {
+            }
+
+            override fun onError(p0: FacebookException?) {
+                Toast.makeText(this@WelcomeActivity, "Unfortunately facebook login failed.", Toast.LENGTH_LONG).show()
+            }
+
+            override fun onSuccess(p0: LoginResult?) {
+                changeFragment(SelectCountryFragment())
+            }
+        })
+
+        changeFragment(WelcomeFragment())
     }
 
     fun changeFragment(f: Fragment, cleanStack: Boolean = false) {
@@ -54,5 +81,10 @@ class WelcomeActivity : AppCompatActivity() {
         } else {
             finish();
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+        super.onActivityResult(requestCode, resultCode, data)
+        callbackManager.onActivityResult(requestCode, resultCode, data)
     }
 }

@@ -46,4 +46,10 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.1.0'
     implementation 'com.squareup.retrofit2:converter-moshi:2.0.0'
     implementation 'com.android.support:support-v4:25.4.0'
+
+    // ActionSheet
+    implementation 'com.github.mancj:SlideUp-Android:2.2.5'
+
+    // Facebook SDK
+    implementation 'com.facebook.android:facebook-android-sdk:4.23.0'
 }
