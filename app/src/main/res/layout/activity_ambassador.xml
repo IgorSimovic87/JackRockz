@@ -28,7 +28,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/gap_M"
+        android:layout_marginTop="@dimen/gap_S"
+        android:gravity="center_vertical"
         android:layout_gravity="center_horizontal">
 
         <android.support.v7.widget.AppCompatTextView
@@ -37,15 +38,17 @@
             android:layout_marginRight="@dimen/gap_S"
             android:textColor="@color/hint_color"
             android:textSize="14sp"
-            android:layout_gravity="center_horizontal"
             android:text="@string/hint_ambassador"/>
 
         <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/txtCall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="?android:selectableItemBackground"
+            android:padding="@dimen/gap_S"
             android:textColor="@color/hint_color"
             android:textSize="14sp"
-            android:layout_gravity="center_horizontal"
+            android:clickable="true"
             android:text="@string/hint_call"/>
     </LinearLayout>
     

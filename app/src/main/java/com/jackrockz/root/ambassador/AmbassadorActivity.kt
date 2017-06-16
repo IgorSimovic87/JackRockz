@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.View
 import com.jackrockz.R
+import kotlinx.android.synthetic.main.activity_ambassador.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 class AmbassadorActivity : AppCompatActivity(), View.OnClickListener {
@@ -16,11 +17,13 @@ class AmbassadorActivity : AppCompatActivity(), View.OnClickListener {
         setSupportActionBar(toolbar)
         btnClose.visibility = View.VISIBLE
         btnClose.setOnClickListener(this)
+        txtCall.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
-        if (v!!.id == R.id.btnClose) {
-            onBackPressed()
+        when (v!!.id) {
+            R.id.btnClose -> onBackPressed()
+//            R.id.txtCall ->
         }
     }
 }
