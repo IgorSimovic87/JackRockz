@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
-import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
@@ -15,14 +14,13 @@ import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.jackrockz.MyApplication
 import com.jackrockz.R
-import com.jackrockz.api.ApiManager
 import com.jackrockz.commons.RxBaseActivity
 import com.jackrockz.onboarding.fragments.SelectCountryFragment
 import com.jackrockz.onboarding.fragments.WelcomeFragment
 import com.jackrockz.root.MainActivity
-import kotlinx.android.synthetic.main.nav_header.*
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
+import rx.subscriptions.CompositeSubscription
 
 class WelcomeActivity : RxBaseActivity() {
     var callbackManager = CallbackManager.Factory.create()
@@ -36,7 +34,7 @@ class WelcomeActivity : RxBaseActivity() {
 
     fun InitFlow() {
         if (AccessToken.getCurrentAccessToken() != null) {
-            ProcessToken(AccessToken.getCurrentAccessToken().token)
+            ProcessToken(AccessToken.getCurrentAccessToken().token, true)
             return;
         }
         LoginManager.getInstance().registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
@@ -48,6 +46,9 @@ class WelcomeActivity : RxBaseActivity() {
             }
 
             override fun onSuccess(p0: LoginResult?) {
+                if (!subscriptions.hasSubscriptions()) {
+                    subscriptions = CompositeSubscription()
+                }
                 ProcessToken(p0!!.accessToken.token)
             }
         })
@@ -55,14 +56,19 @@ class WelcomeActivity : RxBaseActivity() {
         changeFragment(WelcomeFragment())
     }
 
-    fun ProcessToken(facebook_access_token: String) {
+    fun ProcessToken(facebook_access_token: String, isLogged: Boolean = false) {
         val subscription = apiManager.getToken(facebook_access_token)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe (
                         { token ->
                             MyApplication.instance.accessToken = token
-                            gotoNextActivity()
+
+                            if (isLogged) {
+                                gotoNextActivity()
+                            } else {
+                                changeFragment(SelectCountryFragment())
+                            }
                         },
                         { e ->
                             Snackbar.make(findViewById(android.R.id.content), e.message ?: "", Snackbar.LENGTH_LONG).show()

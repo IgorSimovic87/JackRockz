@@ -16,6 +16,6 @@ interface JackApi {
     @GET("cities")
     fun getCities(): Call<CitiesModel>
 
-    @GET("events")
-    fun getEvents(): Call<CitiesModel>
+    @GET("cities/{id}/events/{date}")
+    fun getEvents(@Path("id") id: Int, @Path("date") date: Date): Call<EventsModel>
 }

@@ -6,12 +6,13 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.jackrockz.MyApplication
 import com.jackrockz.R
 import com.jackrockz.api.CityModel
 import com.jackrockz.commons.RxBaseFragment
 import com.jackrockz.onboarding.WelcomeActivity
 import com.jackrockz.onboarding.adapter.CityAdapter
-import kotlinx.android.synthetic.main.activity_welcome.*
+import com.jackrockz.utils.GlobalConstants
 import kotlinx.android.synthetic.main.fragment_select_city.*
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -35,7 +36,7 @@ class SelectCityFragment : RxBaseFragment(), View.OnClickListener {
                             recycler_view.adapter = CityAdapter(this, listItems)
                         },
                         { e ->
-                            Snackbar.make(contentView, e.message ?: "", Snackbar.LENGTH_LONG).show()
+                            Snackbar.make(view!!, e.message ?: "", Snackbar.LENGTH_LONG).show()
                         }
                 )
         subscriptions.add(subscription)
@@ -50,7 +51,11 @@ class SelectCityFragment : RxBaseFragment(), View.OnClickListener {
     }
 
     override fun onClick(v: View) {
-        val subscription = apiManager.putMe(city = v.tag as String)
+        val city = v.tag as CityModel
+
+        MyApplication.instance.saveObject(GlobalConstants.PREFS_CITY, city)
+
+        val subscription = apiManager.putMe(city = city.id.toString())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe (
@@ -60,7 +65,7 @@ class SelectCityFragment : RxBaseFragment(), View.OnClickListener {
 
                         },
                         { e ->
-                            Snackbar.make(contentView, e.message ?: "", android.support.design.widget.Snackbar.LENGTH_LONG).show()
+                            Snackbar.make(view!!, e.message ?: "", android.support.design.widget.Snackbar.LENGTH_LONG).show()
                         }
                 )
         subscriptions.add(subscription)

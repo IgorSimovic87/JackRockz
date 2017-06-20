@@ -3,7 +3,6 @@ package com.jackrockz.onboarding.fragments
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import android.widget.EditText
 import com.jackrockz.R
 import com.jackrockz.commons.RxBaseFragment
 import com.jackrockz.onboarding.WelcomeActivity
-import kotlinx.android.synthetic.main.activity_welcome.*
 import kotlinx.android.synthetic.main.fragment_arrival_date.*
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -69,7 +67,7 @@ class ArrivalDateFragment : RxBaseFragment(), View.OnClickListener {
                                     (activity as WelcomeActivity).gotoNextActivity()
                                 },
                                 { e ->
-                                    Snackbar.make(contentView, e.message ?: "", android.support.design.widget.Snackbar.LENGTH_LONG).show()
+                                    Snackbar.make(view!!, e.message ?: "", android.support.design.widget.Snackbar.LENGTH_LONG).show()
                                 }
                         )
                 subscriptions.add(subscription)

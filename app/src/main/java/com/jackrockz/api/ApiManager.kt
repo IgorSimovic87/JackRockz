@@ -53,4 +53,21 @@ class ApiManager(private val api: RestApi = RestApi()) {
             }
         }
     }
+
+    fun getEvents(id: Int, date: Date): Observable<List<EventModel>> {
+        return Observable.create {
+            subscriber ->
+            val callResponse = api.getEvents(id, date)
+            val response = callResponse.execute()
+
+            if (response.isSuccessful) {
+                val listEvents = response.body().events
+
+                subscriber.onNext(listEvents)
+                subscriber.onCompleted()
+            } else {
+                subscriber.onError(Throwable(response.message()))
+            }
+        }
+    }
 }

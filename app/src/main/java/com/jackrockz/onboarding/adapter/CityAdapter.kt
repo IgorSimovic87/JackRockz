@@ -25,7 +25,7 @@ class CityAdapter(val fragment: SelectCityFragment, val items: ArrayList<CityMod
             txtTitle.text = item.name
             item.image?.let { imgView.loadImg(item.image.medium) }
 
-            tag = item.id.toString()
+            tag = item
             setOnClickListener (fragment)
         }
     }

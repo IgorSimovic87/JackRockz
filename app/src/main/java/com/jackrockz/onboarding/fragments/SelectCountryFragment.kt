@@ -7,10 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.jackrockz.MyApplication
 import com.jackrockz.R
-import com.jackrockz.api.ApiManager
 import com.jackrockz.commons.RxBaseFragment
 import com.jackrockz.onboarding.WelcomeActivity
-import kotlinx.android.synthetic.main.activity_welcome.*
+import com.jackrockz.utils.GlobalConstants
 import kotlinx.android.synthetic.main.fragment_select_country.*
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -29,6 +28,8 @@ class SelectCountryFragment : RxBaseFragment(), View.OnClickListener {
 
     override fun onClick(v: View) {
         if (v.id in listOf(R.id.btnFrance, R.id.btnGermany, R.id.btnItaly, R.id.btnNetherlands, R.id.btnOther)) {
+            MyApplication.instance.saveData(GlobalConstants.PREFS_COUNTRY, v.tag as String)
+
             val subscription = apiManager.putMe(v.tag as String)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -37,7 +38,7 @@ class SelectCountryFragment : RxBaseFragment(), View.OnClickListener {
                                 (activity as WelcomeActivity).changeFragment(SelectCityFragment())
                             },
                             { e ->
-                                Snackbar.make(contentView, e.message ?: "", Snackbar.LENGTH_LONG).show()
+                                Snackbar.make(view!!, e.message ?: "", Snackbar.LENGTH_LONG).show()
                             }
                     )
 

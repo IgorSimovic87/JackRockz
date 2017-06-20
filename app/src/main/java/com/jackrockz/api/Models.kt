@@ -30,8 +30,14 @@ class HashImage(
 
 
 //Event Model
+class EventsModel(
+        val events: List<EventModel>
+)
 class EventModel(
         val id: Int,
-        val date: Date,
-        val target_country: String
+        val title: String,
+        val subtitle: String?,
+        val description: String,
+        val guestlist_count: Int,
+        val image: HashImage?
 )

@@ -10,14 +10,16 @@ open class RxBaseFragment() : Fragment() {
 
     override fun onResume() {
         super.onResume()
-//        subscriptions = CompositeSubscription()
+        if (!subscriptions.hasSubscriptions()) {
+            subscriptions = CompositeSubscription()
+        }
     }
 
     override fun onPause() {
         super.onPause()
-//        if (!subscriptions.isUnsubscribed) {
-//            subscriptions.unsubscribe()
-//        }
-//        subscriptions.clear()
+        if (!subscriptions.isUnsubscribed) {
+            subscriptions.unsubscribe()
+        }
+        subscriptions.clear()
     }
 }
