@@ -3,7 +3,7 @@ package com.jackrockz.root.events
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.jackrockz.R
-import com.jackrockz.commons.EventModel
+import com.jackrockz.api.EventModel
 import com.jackrockz.commons.extensions.inflate
 import java.util.*
 

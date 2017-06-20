@@ -5,14 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.jackrockz.R
-import com.jackrockz.commons.EventModel
-import com.jackrockz.onboarding.adapter.CityAdapter
+import com.jackrockz.api.EventModel
 import kotlinx.android.synthetic.main.fragment_events.*
 import java.text.SimpleDateFormat
 import java.util.*

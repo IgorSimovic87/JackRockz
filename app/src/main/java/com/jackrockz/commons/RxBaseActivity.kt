@@ -1,10 +1,10 @@
 package com.jackrockz.commons
 
-import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import com.jackrockz.api.ApiManager
 import rx.subscriptions.CompositeSubscription
 
-open class RxBaseFragment() : Fragment() {
+open class RxBaseActivity : AppCompatActivity() {
     protected var subscriptions = CompositeSubscription()
     protected val apiManager by lazy { ApiManager() }
 
@@ -20,4 +20,5 @@ open class RxBaseFragment() : Fragment() {
 //        }
 //        subscriptions.clear()
     }
+
 }

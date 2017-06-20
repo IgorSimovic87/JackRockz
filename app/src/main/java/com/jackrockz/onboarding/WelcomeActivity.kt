@@ -2,6 +2,7 @@ package com.jackrockz.onboarding
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
@@ -12,12 +13,18 @@ import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
+import com.jackrockz.MyApplication
 import com.jackrockz.R
+import com.jackrockz.api.ApiManager
+import com.jackrockz.commons.RxBaseActivity
 import com.jackrockz.onboarding.fragments.SelectCountryFragment
 import com.jackrockz.onboarding.fragments.WelcomeFragment
 import com.jackrockz.root.MainActivity
+import kotlinx.android.synthetic.main.nav_header.*
+import rx.android.schedulers.AndroidSchedulers
+import rx.schedulers.Schedulers
 
-class WelcomeActivity : AppCompatActivity() {
+class WelcomeActivity : RxBaseActivity() {
     var callbackManager = CallbackManager.Factory.create()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +36,7 @@ class WelcomeActivity : AppCompatActivity() {
 
     fun InitFlow() {
         if (AccessToken.getCurrentAccessToken() != null) {
-            gotoNextActivity()
+            ProcessToken(AccessToken.getCurrentAccessToken().token)
             return;
         }
         LoginManager.getInstance().registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
@@ -41,11 +48,28 @@ class WelcomeActivity : AppCompatActivity() {
             }
 
             override fun onSuccess(p0: LoginResult?) {
-                changeFragment(SelectCountryFragment())
+                ProcessToken(p0!!.accessToken.token)
             }
         })
 
         changeFragment(WelcomeFragment())
+    }
+
+    fun ProcessToken(facebook_access_token: String) {
+        val subscription = apiManager.getToken(facebook_access_token)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe (
+                        { token ->
+                            MyApplication.instance.accessToken = token
+                            gotoNextActivity()
+                        },
+                        { e ->
+                            Snackbar.make(findViewById(android.R.id.content), e.message ?: "", Snackbar.LENGTH_LONG).show()
+                        }
+                )
+
+        subscriptions.add(subscription)
     }
 
     fun changeFragment(f: Fragment, cleanStack: Boolean = false) {
