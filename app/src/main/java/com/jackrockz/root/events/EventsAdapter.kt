@@ -28,7 +28,7 @@ class EventsAdapter(val fragment: EventsFragment, val items: ArrayList<EventMode
             } else {
                 txtSubTitle.text = item.subtitle
             }
-            txtDescription.text = item.description
+            txtDescription.text = item.venue.name
             txtLeft.text = item.guestlist_count.toString() + " LEFT"
             item.image?.let{imgView.loadImg(item.image.medium)}
 

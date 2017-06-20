@@ -39,5 +39,9 @@ class EventModel(
         val subtitle: String?,
         val description: String,
         val guestlist_count: Int,
-        val image: HashImage?
+        val image: HashImage?,
+        val venue: VenueModel
+)
+class VenueModel(
+        val name: String
 )

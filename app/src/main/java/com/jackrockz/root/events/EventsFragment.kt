@@ -44,24 +44,13 @@ class EventsFragment : RxBaseFragment(), View.OnClickListener {
 
         btnDate.setOnClickListener(this)
 
-        val arySpan = ArrayList<Int>()
-
         recycler_view.apply {
             setHasFixedSize(true)
             val layout = GridLayoutManager(activity, 2)
-            var isFullEnabled = true
             layout.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-                override fun getSpanSize(p0: Int): Int {
-                    if (arySpan.size > p0) {
-                        return arySpan[p0]
-                    }
-                    if (isFullEnabled && Random().nextBoolean()) {
-                        arySpan.add(2)
-                        return arySpan[p0]
-                    }
-                    isFullEnabled = !isFullEnabled
-                    arySpan.add(1)
-                    return arySpan[p0]
+                override fun getSpanSize(p0: Int): Int = when(p0){
+                    0 -> 2
+                    else -> 1
                 }
             }
             layoutManager = layout
