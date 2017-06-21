@@ -19,13 +19,15 @@
             android:text="One Night Stand - Subtitle" />
 
         <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/txtDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:textStyle="bold"
-            android:text="05/22/17" />
+            android:text="06/22/17" />
 
         <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/txtVenue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/txtTitle"

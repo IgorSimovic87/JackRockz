@@ -35,8 +35,9 @@ class RestApi {
     }
 
     fun getToken(facebook_access_token: String) = jackApi.postUser(facebook_access_token)
-    fun putMe(country: String?, city: String?, arrivalDate: Date?, departureDate: Date?) = jackApiHeader.putMe(country, city, arrivalDate, departureDate)
+    fun putMe(country: String?, city: String?, arrivalDate: Date?, departureDate: Date?, ambassadorID: String?) = jackApiHeader.putMe(country, city, arrivalDate, departureDate, ambassadorID)
     fun getCities() = jackApiHeader.getCities()
     fun getEvents(id: Int, date: Date) = jackApiHeader.getEvents(id, date)
+    fun getAmbassadors(code: String) = jackApiHeader.getAmbassadors(code)
 
 }

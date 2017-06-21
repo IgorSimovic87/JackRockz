@@ -22,10 +22,10 @@ class ApiManager(private val api: RestApi = RestApi()) {
         }
     }
 
-    fun putMe(country: String? = null, city: String? = null, arrivalDate: Date? = null, departureDate: Date? = null): Observable<Unit> {
+    fun putMe(country: String? = null, city: String? = null, arrivalDate: Date? = null, departureDate: Date? = null, ambassadorID: String? = null): Observable<Unit> {
         return Observable.create {
             subscriber ->
-            val callResponse = api.putMe(country, city, arrivalDate, departureDate)
+            val callResponse = api.putMe(country, city, arrivalDate, departureDate, ambassadorID)
             val response = callResponse.execute()
 
             if (response.isSuccessful) {
@@ -64,6 +64,23 @@ class ApiManager(private val api: RestApi = RestApi()) {
                 val listEvents = response.body().events
 
                 subscriber.onNext(listEvents)
+                subscriber.onCompleted()
+            } else {
+                subscriber.onError(Throwable(response.message()))
+            }
+        }
+    }
+
+    fun getAmbassador(code: String): Observable<AmbassadorModel> {
+        return Observable.create {
+            subscriber ->
+            val callResponse = api.getAmbassadors(code)
+            val response = callResponse.execute()
+
+            if (response.isSuccessful) {
+                val ambassador = response.body().ambassador
+
+                subscriber.onNext(ambassador)
                 subscriber.onCompleted()
             } else {
                 subscriber.onError(Throwable(response.message()))

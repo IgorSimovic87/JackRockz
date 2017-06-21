@@ -10,6 +10,7 @@ import com.jackrockz.R
 import com.jackrockz.commons.RxBaseFragment
 import com.jackrockz.onboarding.WelcomeActivity
 import com.jackrockz.utils.GlobalConstants
+import com.jackrockz.utils.Utils
 import kotlinx.android.synthetic.main.fragment_select_country.*
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -23,21 +24,22 @@ class SelectCountryFragment : RxBaseFragment(), View.OnClickListener {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        listOf(btnGermany, btnFrance, btnItaly, btnNetherlands, btnOther).forEach { button -> button.setOnClickListener(this) }
+        listOf(btnGermany, btnFrance, btnItaly, btnNetherlands, btnOther).forEach { it.setOnClickListener(this) }
     }
 
     override fun onClick(v: View) {
         if (v.id in listOf(R.id.btnFrance, R.id.btnGermany, R.id.btnItaly, R.id.btnNetherlands, R.id.btnOther)) {
+            Utils.showLoading(activity)
             MyApplication.instance.saveData(GlobalConstants.PREFS_COUNTRY, v.tag as String)
 
-            val subscription = apiManager.putMe(v.tag as String)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
+            val subscription = apiManager.putMe(v.tag as String).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                     .subscribe (
                             { _ ->
+                                Utils.hideLoading()
                                 (activity as WelcomeActivity).changeFragment(SelectCityFragment())
                             },
                             { e ->
+                                Utils.hideLoading()
                                 Snackbar.make(view!!, e.message ?: "", Snackbar.LENGTH_LONG).show()
                             }
                     )

@@ -17,6 +17,7 @@
 
         <!--EditText Style-->
         <item name="editTextStyle">@style/My_EditTextStyle</item>
+        
     </style>
 
     <style name="My_EditTextStyle" parent="Widget.AppCompat.EditText">

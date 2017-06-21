@@ -8,15 +8,13 @@ open class RxBaseActivity : AppCompatActivity() {
     protected var subscriptions = CompositeSubscription()
     protected val apiManager by lazy { ApiManager() }
 
-    override fun onResume() {
-        super.onResume()
-        if (!subscriptions.hasSubscriptions()) {
-            subscriptions = CompositeSubscription()
-        }
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        subscriptions = CompositeSubscription()
     }
 
-    override fun onPause() {
-        super.onPause()
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
         if (!subscriptions.isUnsubscribed) {
             subscriptions.unsubscribe()
         }

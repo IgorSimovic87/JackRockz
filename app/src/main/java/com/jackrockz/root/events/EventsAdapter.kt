@@ -31,8 +31,8 @@ class EventsAdapter(val fragment: EventsFragment, val items: ArrayList<EventMode
             txtDescription.text = item.venue.name
             txtLeft.text = item.guestlist_count.toString() + " LEFT"
             item.image?.let{imgView.loadImg(item.image.medium)}
-
-            super.itemView.setOnClickListener (fragment)
+            tag = item
+            setOnClickListener (fragment)
         }
     }
 }

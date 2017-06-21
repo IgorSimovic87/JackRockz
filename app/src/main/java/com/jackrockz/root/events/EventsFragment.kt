@@ -65,6 +65,7 @@ class EventsFragment : RxBaseFragment(), View.OnClickListener {
                 picker.show()
             }
             else -> {
+                MyApplication.instance.currentEvent = v.tag as EventModel
                 startActivity(Intent(activity, EventDetailActivity::class.java))
             }
         }
@@ -81,8 +82,10 @@ class EventsFragment : RxBaseFragment(), View.OnClickListener {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe (
                         { aryEvents ->
-                            listItems = aryEvents as ArrayList<EventModel>
-                            recycler_view.adapter = EventsAdapter(this, listItems)
+                            aryEvents?.let {
+                                listItems = aryEvents as ArrayList<EventModel>
+                                recycler_view.adapter = EventsAdapter(this, listItems)
+                            }
                         },
                         { e ->
                             Snackbar.make(view!!, e.message ?: "", Snackbar.LENGTH_LONG).show()

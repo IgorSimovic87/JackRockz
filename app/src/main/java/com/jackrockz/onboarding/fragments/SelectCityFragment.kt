@@ -2,6 +2,7 @@ package com.jackrockz.onboarding.fragments
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import com.jackrockz.commons.RxBaseFragment
 import com.jackrockz.onboarding.WelcomeActivity
 import com.jackrockz.onboarding.adapter.CityAdapter
 import com.jackrockz.utils.GlobalConstants
+import com.jackrockz.utils.Utils
 import kotlinx.android.synthetic.main.fragment_select_city.*
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -27,11 +29,11 @@ class SelectCityFragment : RxBaseFragment(), View.OnClickListener {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val subscription = apiManager.getCities()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+        val subscription = apiManager.getCities().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe (
                         { aryCities ->
+                            progressBar.visibility = View.GONE
+
                             listItems = aryCities as ArrayList<CityModel>
                             recycler_view.adapter = CityAdapter(this, listItems)
                         },
@@ -46,25 +48,25 @@ class SelectCityFragment : RxBaseFragment(), View.OnClickListener {
             val linearLayout = LinearLayoutManager(context)
             linearLayout.orientation = LinearLayoutManager.VERTICAL
             layoutManager = linearLayout
+            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
             adapter = CityAdapter(this@SelectCityFragment, listItems)
         }
     }
 
     override fun onClick(v: View) {
-        val city = v.tag as CityModel
+        Utils.showLoading(activity)
 
+        val city = v.tag as CityModel
         MyApplication.instance.saveObject(GlobalConstants.PREFS_CITY, city)
 
-        val subscription = apiManager.putMe(city = city.id.toString())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe (
+        val subscription = apiManager.putMe(city = city.id.toString()).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
                         { _ ->
-
+                            Utils.hideLoading()
                             (activity as WelcomeActivity).changeFragment(ArrivalDateFragment())
-
                         },
                         { e ->
+                            Utils.hideLoading()
                             Snackbar.make(view!!, e.message ?: "", android.support.design.widget.Snackbar.LENGTH_LONG).show()
                         }
                 )

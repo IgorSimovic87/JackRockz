@@ -23,8 +23,14 @@
             android:icon="@drawable/event_cell_lock_icon_small"
             android:title="@string/nav_enter_ambassador_code" />
         <item
-            android:id="@+id/nav_logout"
-            android:title="@string/nav_logout" />
+                android:id="@+id/nav_logout"
+            android:title="@string/nav_logout"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="91dp"
+            android:layout_marginStart="91dp"
+            android:layout_marginTop="138dp" />
     </group>
 
 </menu>

@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/imgView"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:scaleType="fitXY"
@@ -45,6 +46,7 @@
             android:textStyle="bold" />
 
         <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/txtPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -63,11 +65,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/gap_M">
         <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/txtViewsCount"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:paddingBottom="@dimen/gap_S"
-        android:text="45x"
+            android:text="45x"
             android:gravity="center"
             android:textStyle="bold"
             android:textSize="23sp"/>
@@ -76,6 +79,7 @@
             android:layout_height="match_parent"
             android:background="@color/divider_color" />
         <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/txtExpCount"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -88,6 +92,7 @@
             android:layout_height="match_parent"
             android:background="@color/divider_color" />
         <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/txtGuestCount"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

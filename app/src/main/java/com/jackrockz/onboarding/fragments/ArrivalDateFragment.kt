@@ -10,6 +10,7 @@ import android.widget.EditText
 import com.jackrockz.R
 import com.jackrockz.commons.RxBaseFragment
 import com.jackrockz.onboarding.WelcomeActivity
+import com.jackrockz.utils.Utils
 import kotlinx.android.synthetic.main.fragment_arrival_date.*
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -17,21 +18,21 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class ArrivalDateFragment : RxBaseFragment(), View.OnClickListener {
-    val myCalendar = Calendar.getInstance()
+    val myCalendar = Calendar.getInstance()!!
     val date = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
         myCalendar.set(year, month, dayOfMonth, 0, 0)
         if ((view.tag as Int) == R.id.txtArrivalDate) {
             arrivalDate = myCalendar.time
-            updateLabel(txtArrivalDate, arrivalDate)
+            updateLabel(txtArrivalDate, arrivalDate!!)
         } else {
             departureDate = myCalendar.time
-            updateLabel(txtDepartureDate, departureDate)
+            updateLabel(txtDepartureDate, departureDate!!)
         }
     }
     val myFormat = "dd-MM-yyyy"
     val sdf = SimpleDateFormat(myFormat, Locale.US)
-    var arrivalDate = Date()
-    var departureDate = Date()
+    var arrivalDate: Date? = null
+    var departureDate: Date? = null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater!!.inflate(R.layout.fragment_arrival_date, container, false)
@@ -47,26 +48,27 @@ class ArrivalDateFragment : RxBaseFragment(), View.OnClickListener {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.txtArrivalDate -> {
-                myCalendar.time = arrivalDate
+                myCalendar.time = arrivalDate ?: Date()
                 val picker = DatePickerDialog(activity, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH))
                 picker.datePicker.tag = v.id
                 picker.show()
             }
             R.id.txtDepartureDate -> {
-                myCalendar.time = departureDate
+                myCalendar.time = departureDate ?: Date()
                 val picker = DatePickerDialog(activity, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH))
                 picker.datePicker.tag = v.id
                 picker.show()
             }
             R.id.btnNext -> {
-                val subscription = apiManager.putMe(arrivalDate = arrivalDate, departureDate = departureDate)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
+                Utils.showLoading(activity)
+                val subscription = apiManager.putMe(arrivalDate = arrivalDate, departureDate = departureDate).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                         .subscribe (
                                 { _ ->
+                                    Utils.hideLoading()
                                     (activity as WelcomeActivity).gotoNextActivity()
                                 },
                                 { e ->
+                                    Utils.hideLoading()
                                     Snackbar.make(view!!, e.message ?: "", android.support.design.widget.Snackbar.LENGTH_LONG).show()
                                 }
                         )

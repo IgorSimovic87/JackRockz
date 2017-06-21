@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
+import android.support.v4.content.ContextCompat.startActivity
 import android.widget.Toast
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
@@ -18,6 +19,7 @@ import com.jackrockz.commons.RxBaseActivity
 import com.jackrockz.onboarding.fragments.SelectCountryFragment
 import com.jackrockz.onboarding.fragments.WelcomeFragment
 import com.jackrockz.root.MainActivity
+import com.jackrockz.utils.Utils
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import rx.subscriptions.CompositeSubscription
@@ -64,6 +66,7 @@ class WelcomeActivity : RxBaseActivity() {
                         { token ->
                             MyApplication.instance.accessToken = token
 
+                            Utils.hideLoading()
                             if (isLogged) {
                                 gotoNextActivity()
                             } else {
@@ -71,6 +74,7 @@ class WelcomeActivity : RxBaseActivity() {
                             }
                         },
                         { e ->
+                            Utils.hideLoading()
                             Snackbar.make(findViewById(android.R.id.content), e.message ?: "", Snackbar.LENGTH_LONG).show()
                         }
                 )

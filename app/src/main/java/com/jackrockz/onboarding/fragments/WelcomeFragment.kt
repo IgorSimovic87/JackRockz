@@ -15,6 +15,7 @@ import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.jackrockz.R
 import com.jackrockz.onboarding.WelcomeActivity
+import com.jackrockz.utils.Utils
 import kotlinx.android.synthetic.main.fragment_welcome.*
 import java.util.*
 
@@ -32,6 +33,7 @@ class WelcomeFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(v: View) {
         if (v.id == R.id.btnFacebook) {
+            Utils.showLoading(activity)
             LoginManager.getInstance().logInWithReadPermissions(activity, Arrays.asList("public_profile", "email"));
         }
     }

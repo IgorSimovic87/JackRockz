@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.SharedPreferences
 import com.facebook.FacebookSdk
 import com.google.gson.Gson
+import com.jackrockz.api.EventModel
 import com.jackrockz.utils.GlobalConstants
 
 class MyApplication : Application() {
@@ -12,9 +13,10 @@ class MyApplication : Application() {
             private set
     }
 
-    var accessToken : String = ""
+    var accessToken: String = ""
     val settings by lazy { getSharedPreferences(GlobalConstants.PREFS_NAME, 0) }
     val editor by lazy { settings.edit() }
+    lateinit var currentEvent: EventModel
 
     override fun onCreate() {
         FacebookSdk.sdkInitialize(applicationContext)

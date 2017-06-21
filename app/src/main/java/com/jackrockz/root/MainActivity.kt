@@ -8,7 +8,9 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import com.facebook.login.LoginManager
 import com.jackrockz.R
+import com.jackrockz.onboarding.WelcomeActivity
 import com.jackrockz.root.ambassador.AmbassadorActivity
 import com.jackrockz.root.events.EventsFragment
 import com.jackrockz.root.support.SupportFragment
@@ -22,6 +24,11 @@ class MainActivity : AppCompatActivity() {
     var mHandler: Handler = Handler()
 
     var activityTitles = arrayOf<String>()
+
+    var onBackPressedListener: OnBackPressedListener? = null
+    interface OnBackPressedListener {
+        fun doBack()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,6 +94,12 @@ class MainActivity : AppCompatActivity() {
                     startActivity(Intent(this, AmbassadorActivity::class.java))
                     return@setNavigationItemSelectedListener true
                 }
+                R.id.nav_logout -> {
+                    LoginManager.getInstance().logOut()
+                    startActivity(Intent(this, WelcomeActivity::class.java))
+                    finish()
+                    return@setNavigationItemSelectedListener true
+                }
             }
 
             menuItem.isChecked = !menuItem.isChecked
@@ -119,6 +132,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
+        if (onBackPressedListener != null) {
+            onBackPressedListener!!.doBack()
+            return
+        }
+
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawers()
             return
