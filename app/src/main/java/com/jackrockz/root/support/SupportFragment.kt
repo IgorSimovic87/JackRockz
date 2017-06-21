@@ -13,13 +13,14 @@ import com.jackrockz.R
 import com.jackrockz.api.CityModel
 import com.jackrockz.root.MainActivity
 import com.jackrockz.utils.GlobalConstants
+import com.jackrockz.utils.Utils.Companion.loadObject
 import com.mancj.slideup.SlideUp
 import kotlinx.android.synthetic.main.contact.*
 import kotlinx.android.synthetic.main.fragment_support.*
 
 class SupportFragment : Fragment(), View.OnClickListener, MainActivity.OnBackPressedListener {
     lateinit var slideUp: SlideUp
-    val city = MyApplication.instance.loadObject(GlobalConstants.PREFS_CITY, CityModel::class.java)
+    val city by lazy { MyApplication.instance.currentUser.city!! }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater!!.inflate(R.layout.fragment_support, container, false)

@@ -30,11 +30,11 @@ class SelectCountryFragment : RxBaseFragment(), View.OnClickListener {
     override fun onClick(v: View) {
         if (v.id in listOf(R.id.btnFrance, R.id.btnGermany, R.id.btnItaly, R.id.btnNetherlands, R.id.btnOther)) {
             Utils.showLoading(activity)
-            MyApplication.instance.saveData(GlobalConstants.PREFS_COUNTRY, v.tag as String)
 
             val subscription = apiManager.putMe(v.tag as String).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                     .subscribe (
-                            { _ ->
+                            { user ->
+                                Utils.saveObject(GlobalConstants.PREFS_USER, user)
                                 Utils.hideLoading()
                                 (activity as WelcomeActivity).changeFragment(SelectCityFragment())
                             },

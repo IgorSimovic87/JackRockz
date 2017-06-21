@@ -29,6 +29,9 @@ class SelectCityFragment : RxBaseFragment(), View.OnClickListener {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (savedInstanceState != null)
+            return
+
         val subscription = apiManager.getCities().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe (
                         { aryCities ->
@@ -57,11 +60,12 @@ class SelectCityFragment : RxBaseFragment(), View.OnClickListener {
         Utils.showLoading(activity)
 
         val city = v.tag as CityModel
-        MyApplication.instance.saveObject(GlobalConstants.PREFS_CITY, city)
 
         val subscription = apiManager.putMe(city = city.id.toString()).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        { _ ->
+                        { user ->
+                            Utils.saveObject(GlobalConstants.PREFS_USER, user)
+
                             Utils.hideLoading()
                             (activity as WelcomeActivity).changeFragment(ArrivalDateFragment())
                         },

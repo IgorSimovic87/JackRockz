@@ -11,6 +11,8 @@ import com.jackrockz.R
 import com.jackrockz.api.CityModel
 import com.jackrockz.commons.RxBaseActivity
 import com.jackrockz.utils.GlobalConstants
+import com.jackrockz.utils.Utils
+import com.jackrockz.utils.Utils.Companion.loadObject
 import com.mancj.slideup.SlideUp
 import kotlinx.android.synthetic.main.activity_ambassador.*
 import kotlinx.android.synthetic.main.contact.*
@@ -20,7 +22,7 @@ import rx.schedulers.Schedulers
 
 class AmbassadorActivity : RxBaseActivity(), View.OnClickListener {
     lateinit var slideUp: SlideUp
-    val city = MyApplication.instance.loadObject(GlobalConstants.PREFS_CITY, CityModel::class.java)
+    val city by lazy { MyApplication.instance.currentUser.city!! }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,13 +30,8 @@ class AmbassadorActivity : RxBaseActivity(), View.OnClickListener {
 
         setSupportActionBar(toolbar)
         btnClose.visibility = View.VISIBLE
-        btnClose.setOnClickListener(this)
-        txtCall.setOnClickListener(this)
-        txtPhone.setOnClickListener(this)
-        txtEmail.setOnClickListener(this)
-        txtWhatsApp.setOnClickListener(this)
-        txtCancel.setOnClickListener(this)
-        btnValidate.setOnClickListener(this)
+
+        listOf(btnClose, txtCall, txtPhone, txtEmail, txtWhatsApp, txtCancel, btnValidate).forEach { (it as View).setOnClickListener(this) }
 
         slideUp = SlideUp.Builder(slideView)
                 .withListeners(object : SlideUp.Listener.Events {
@@ -95,26 +92,29 @@ class AmbassadorActivity : RxBaseActivity(), View.OnClickListener {
     }
 
     fun OnValidate() {
-        val subscription = apiManager.getAmbassador(txtCode.text.toString())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+        Utils.showLoading(this)
+        val subscription = apiManager.getAmbassador(txtCode.text.toString()).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe (
                         { ambassador ->
-                            val subscription = apiManager.putMe(ambassadorID = ambassador.id.toString())
-                                    .subscribeOn(Schedulers.io())
-                                    .observeOn(AndroidSchedulers.mainThread())
+                            val subscription = apiManager.putMe(ambassadorID = ambassador.id.toString()).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                                     .subscribe (
-                                            { _->
+                                            { user ->
+                                                MyApplication.instance.currentUser = user
+                                                Utils.saveObject(GlobalConstants.PREFS_USER, user)
+
+                                                Utils.hideLoading()
                                                 onBackPressed()
                                             },
                                             { e ->
-                                                Snackbar.make(contentView, e.message ?: "", Snackbar.LENGTH_LONG).show()
+                                                Utils.hideLoading()
+                                                Utils.showAlertDialog(this, message = e.message ?: "Connection Error")
                                             }
                                     )
                             subscriptions.add(subscription)
                         },
                         { e ->
-                            Snackbar.make(contentView, e.message ?: "", Snackbar.LENGTH_LONG).show()
+                            Utils.hideLoading()
+                            Utils.showAlertDialog(this, "Oops...", "The entered code is invalid. Please enter the correct code.")
                         }
                 )
         subscriptions.add(subscription)

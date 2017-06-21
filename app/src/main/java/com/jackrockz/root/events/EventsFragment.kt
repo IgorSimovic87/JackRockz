@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import com.jackrockz.api.CityModel
 import com.jackrockz.api.EventModel
 import com.jackrockz.commons.RxBaseFragment
 import com.jackrockz.utils.GlobalConstants
+import com.jackrockz.utils.Utils
 import kotlinx.android.synthetic.main.fragment_events.*
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -30,7 +32,6 @@ class EventsFragment : RxBaseFragment(), View.OnClickListener {
     val myFormat = "MMM dd, yyyy"
     val sdf = SimpleDateFormat(myFormat, Locale.US)
     var listItems = ArrayList<EventModel>()
-    val cityID = MyApplication.instance.loadObject(GlobalConstants.PREFS_CITY, CityModel::class.java).id
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater!!.inflate(R.layout.fragment_events, container, false)
@@ -54,6 +55,7 @@ class EventsFragment : RxBaseFragment(), View.OnClickListener {
                 }
             }
             layoutManager = layout
+            addItemDecoration(DividerItemDecoration(context, layout.orientation))
             adapter = EventsAdapter(this@EventsFragment, listItems)
         }
     }
@@ -72,16 +74,19 @@ class EventsFragment : RxBaseFragment(), View.OnClickListener {
     }
 
     fun updateLabel() {
+        progressBar.visibility = View.VISIBLE
+        listItems.clear()
+        recycler_view.adapter = EventsAdapter(this, listItems)
+
         GetEvents()
-        txtDate.setText(sdf.format(myCalendar.time))
+        txtDate.text = sdf.format(myCalendar.time)
     }
 
     fun GetEvents() {
-        val subscription = apiManager.getEvents(cityID, myCalendar.time)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+        val subscription = apiManager.getEvents(MyApplication.instance.currentUser.city!!.id, myCalendar.time).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe (
                         { aryEvents ->
+                            progressBar.visibility = View.GONE
                             aryEvents?.let {
                                 listItems = aryEvents as ArrayList<EventModel>
                                 recycler_view.adapter = EventsAdapter(this, listItems)

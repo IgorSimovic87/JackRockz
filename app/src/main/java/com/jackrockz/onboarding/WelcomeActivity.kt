@@ -15,10 +15,12 @@ import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.jackrockz.MyApplication
 import com.jackrockz.R
+import com.jackrockz.api.UserModel
 import com.jackrockz.commons.RxBaseActivity
 import com.jackrockz.onboarding.fragments.SelectCountryFragment
 import com.jackrockz.onboarding.fragments.WelcomeFragment
 import com.jackrockz.root.MainActivity
+import com.jackrockz.utils.GlobalConstants
 import com.jackrockz.utils.Utils
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -103,6 +105,7 @@ class WelcomeActivity : RxBaseActivity() {
     }
 
     fun gotoNextActivity() {
+        MyApplication.instance.currentUser = Utils.loadObject(GlobalConstants.PREFS_USER, UserModel::class.java)
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()

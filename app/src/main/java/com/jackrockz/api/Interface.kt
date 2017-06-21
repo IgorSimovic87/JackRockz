@@ -12,7 +12,7 @@ interface JackApi {
     @FormUrlEncoded
     @PUT("users/me")
     fun putMe(@Field("country") country: String?, @Field("city_id") city:String?, @Field("arrival_date") arrivalDate: Date?,
-              @Field("departure_data") departureDate: Date?, @Field("ambassador_id") ambassador_id: String?): Call<Any>
+              @Field("departure_data") departureDate: Date?, @Field("ambassador_id") ambassador_id: String?): Call<UsersModel>
 
     @GET("cities")
     fun getCities(): Call<CitiesModel>

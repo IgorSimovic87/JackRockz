@@ -10,6 +10,7 @@ import android.widget.EditText
 import com.jackrockz.R
 import com.jackrockz.commons.RxBaseFragment
 import com.jackrockz.onboarding.WelcomeActivity
+import com.jackrockz.utils.GlobalConstants
 import com.jackrockz.utils.Utils
 import kotlinx.android.synthetic.main.fragment_arrival_date.*
 import rx.android.schedulers.AndroidSchedulers
@@ -63,7 +64,9 @@ class ArrivalDateFragment : RxBaseFragment(), View.OnClickListener {
                 Utils.showLoading(activity)
                 val subscription = apiManager.putMe(arrivalDate = arrivalDate, departureDate = departureDate).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                         .subscribe (
-                                { _ ->
+                                { user ->
+                                    Utils.saveObject(GlobalConstants.PREFS_USER, user)
+
                                     Utils.hideLoading()
                                     (activity as WelcomeActivity).gotoNextActivity()
                                 },

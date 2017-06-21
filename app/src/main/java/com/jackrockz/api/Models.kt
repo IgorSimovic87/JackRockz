@@ -1,8 +1,5 @@
 package com.jackrockz.api
 
-import java.sql.Time
-import java.util.*
-
 // Authentication Token Model
 class AuthenticationTokenModel (
         val authentication_token: TokenModel
@@ -46,8 +43,8 @@ class EventModel(
         val price: String,
         val regular_price: String,
         val venue: VenueModel,
-        val start_date: Time
-//        val end_date: Date
+        val start_date: String,
+        val end_date: String
 )
 class VenueModel(
         val name: String,
@@ -65,3 +62,22 @@ class AmbassadorModel(
         val last_name: String,
         val code: String
 )
+
+
+//User Model
+class UserModel(
+        val id: Int,
+        val first_name: String?,
+        val last_name: String?,
+        val email: String?,
+        val locale: String,
+        val country: String,
+        val arrival_date: String?,
+        val departure_date: String?,
+        val city: CityModel?,
+        val ambassador: AmbassadorModel?
+)
+class UsersModel(
+        val user: UserModel
+)
+

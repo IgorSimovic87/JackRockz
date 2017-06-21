@@ -7,8 +7,10 @@ import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.view.Gravity
 import android.view.View
 import com.facebook.login.LoginManager
+import com.jackrockz.MyApplication
 import com.jackrockz.R
 import com.jackrockz.onboarding.WelcomeActivity
 import com.jackrockz.root.ambassador.AmbassadorActivity
@@ -45,6 +47,12 @@ class MainActivity : AppCompatActivity() {
             CURRENT_TAG = "events"
             loadHomeFragment()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        nav_view.menu.findItem(R.id.nav_code).isVisible = MyApplication.instance.currentUser.ambassador == null
     }
 
     fun getHomeFragment(): Fragment = when (navItemIndex) {
@@ -91,6 +99,7 @@ class MainActivity : AppCompatActivity() {
                     CURRENT_TAG = "support"
                 }
                 R.id.nav_code -> {
+                    drawer_layout.closeDrawer(Gravity.LEFT)
                     startActivity(Intent(this, AmbassadorActivity::class.java))
                     return@setNavigationItemSelectedListener true
                 }

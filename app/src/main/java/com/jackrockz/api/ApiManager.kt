@@ -22,14 +22,16 @@ class ApiManager(private val api: RestApi = RestApi()) {
         }
     }
 
-    fun putMe(country: String? = null, city: String? = null, arrivalDate: Date? = null, departureDate: Date? = null, ambassadorID: String? = null): Observable<Unit> {
+    fun putMe(country: String? = null, city: String? = null, arrivalDate: Date? = null, departureDate: Date? = null, ambassadorID: String? = null): Observable<UserModel> {
         return Observable.create {
             subscriber ->
             val callResponse = api.putMe(country, city, arrivalDate, departureDate, ambassadorID)
             val response = callResponse.execute()
 
             if (response.isSuccessful) {
-                subscriber.onNext(null)
+                val user = response.body().user
+
+                subscriber.onNext(user)
                 subscriber.onCompleted()
             } else {
                 subscriber.onError(Throwable(response.message()))
