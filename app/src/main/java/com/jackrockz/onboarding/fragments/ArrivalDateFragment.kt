@@ -2,7 +2,6 @@ package com.jackrockz.onboarding.fragments
 
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,8 +29,7 @@ class ArrivalDateFragment : RxBaseFragment(), View.OnClickListener {
             updateLabel(txtDepartureDate, departureDate!!)
         }
     }
-    val myFormat = "dd-MM-yyyy"
-    val sdf = SimpleDateFormat(myFormat, Locale.US)
+    val sdf = SimpleDateFormat("dd-MM-yyyy", Locale.US)
     var arrivalDate: Date? = null
     var departureDate: Date? = null
 
@@ -72,7 +70,7 @@ class ArrivalDateFragment : RxBaseFragment(), View.OnClickListener {
                                 },
                                 { e ->
                                     Utils.hideLoading()
-                                    Snackbar.make(view!!, e.message ?: "", android.support.design.widget.Snackbar.LENGTH_LONG).show()
+                                    Utils.showToast(activity, "Network connection error.")
                                 }
                         )
                 subscriptions.add(subscription)

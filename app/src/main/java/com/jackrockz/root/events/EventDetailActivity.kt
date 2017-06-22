@@ -20,7 +20,7 @@ class EventDetailActivity : AppCompatActivity(), View.OnClickListener {
 
         event = MyApplication.instance.currentEvent
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        txtStroke.paintFlags = txtStroke.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+        txtRegularPrice.paintFlags = txtRegularPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
         btnGet.setOnClickListener(this)
 
         txtTitle.text = event.title
@@ -28,8 +28,8 @@ class EventDetailActivity : AppCompatActivity(), View.OnClickListener {
         txtViewsCount.text = event.views_count.toString() + "x"
         txtExpCount.text = event.experience_count.toString() + "x"
         txtGuestCount.text = event.guestlist_count.toString() + "x"
-        txtPrice.text = event.price.toString()
-        txtStroke.text = event.regular_price.toString()
+        txtPrice.text = event.price
+        txtRegularPrice.text = event.regular_price
 
         event.image?.let { imgView.loadImg(event.image!!.medium) }
 

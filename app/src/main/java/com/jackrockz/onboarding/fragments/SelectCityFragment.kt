@@ -1,13 +1,11 @@
 package com.jackrockz.onboarding.fragments
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.jackrockz.MyApplication
 import com.jackrockz.R
 import com.jackrockz.api.CityModel
 import com.jackrockz.commons.RxBaseFragment
@@ -41,7 +39,8 @@ class SelectCityFragment : RxBaseFragment(), View.OnClickListener {
                             recycler_view.adapter = CityAdapter(this, listItems)
                         },
                         { e ->
-                            Snackbar.make(view!!, e.message ?: "", Snackbar.LENGTH_LONG).show()
+                            progressBar.visibility = View.GONE
+                            Utils.showToast(activity, "Network connection error.")
                         }
                 )
         subscriptions.add(subscription)
@@ -71,7 +70,7 @@ class SelectCityFragment : RxBaseFragment(), View.OnClickListener {
                         },
                         { e ->
                             Utils.hideLoading()
-                            Snackbar.make(view!!, e.message ?: "", android.support.design.widget.Snackbar.LENGTH_LONG).show()
+                            Utils.showToast(activity, "Network connection error.")
                         }
                 )
         subscriptions.add(subscription)

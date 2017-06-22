@@ -33,6 +33,7 @@
             android:text="Name"/>
 
         <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/txtName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
@@ -52,6 +53,7 @@
             android:text="Quantity"/>
 
         <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/txtQuantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
@@ -70,6 +72,7 @@
             android:text="Event / Deal"/>
 
         <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/txtTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
@@ -88,6 +91,7 @@
             android:text="Location"/>
 
         <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/txtLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
@@ -106,6 +110,7 @@
             android:text="Date"/>
 
         <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/txtDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"

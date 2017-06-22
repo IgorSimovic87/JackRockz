@@ -46,7 +46,8 @@ class WelcomeActivity : RxBaseActivity() {
             }
 
             override fun onError(p0: FacebookException?) {
-                Toast.makeText(this@WelcomeActivity, "Unfortunately facebook login failed.", Toast.LENGTH_LONG).show()
+                Utils.hideLoading()
+                Utils.showToast(this@WelcomeActivity, "Unfortunately facebook login failed.")
             }
 
             override fun onSuccess(p0: LoginResult?) {
@@ -72,12 +73,12 @@ class WelcomeActivity : RxBaseActivity() {
                             if (isLogged) {
                                 gotoNextActivity()
                             } else {
-                                changeFragment(SelectCountryFragment())
+                                changeFragment(SelectCountryFragment(), true)
                             }
                         },
                         { e ->
                             Utils.hideLoading()
-                            Snackbar.make(findViewById(android.R.id.content), e.message ?: "", Snackbar.LENGTH_LONG).show()
+                            Utils.showToast(this@WelcomeActivity, "Unfortunately facebook login failed.")
                         }
                 )
 

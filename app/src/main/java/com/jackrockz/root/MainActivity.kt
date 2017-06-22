@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
 import android.view.View
+import android.widget.TextView
 import com.facebook.login.LoginManager
 import com.jackrockz.MyApplication
 import com.jackrockz.R
@@ -17,6 +18,7 @@ import com.jackrockz.root.ambassador.AmbassadorActivity
 import com.jackrockz.root.events.EventsFragment
 import com.jackrockz.root.support.SupportFragment
 import com.jackrockz.root.tickets.MyTicketsFragment
+import com.jackrockz.utils.GlobalConstants
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
 
@@ -26,6 +28,8 @@ class MainActivity : AppCompatActivity() {
     var mHandler: Handler = Handler()
 
     var activityTitles = arrayOf<String>()
+
+    var isFromPayment = false
 
     var onBackPressedListener: OnBackPressedListener? = null
     interface OnBackPressedListener {
@@ -37,12 +41,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
+        isFromPayment = intent.getBooleanExtra(GlobalConstants.PREFS_ISFROMPAYMENT, false)
+
         mHandler = Handler()
         activityTitles = resources.getStringArray(R.array.nav_item_activity_titles)
 
         setUpNavigationView()
 
-        if (savedInstanceState == null) {
+        if (isFromPayment) {
+            navItemIndex = 1
+            CURRENT_TAG = "my tickets"
+            loadHomeFragment()
+        } else if (savedInstanceState == null) {
             navItemIndex = 0
             CURRENT_TAG = "events"
             loadHomeFragment()
@@ -84,6 +94,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun setUpNavigationView() {
+        (nav_view.getHeaderView(0).findViewById(R.id.txtName) as TextView).text = MyApplication.instance.currentUser.first_name + " " + MyApplication.instance.currentUser.last_name
         nav_view.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_events -> {

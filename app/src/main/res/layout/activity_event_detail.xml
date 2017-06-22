@@ -36,7 +36,7 @@
             android:textSize="25sp"/>
 
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/txtStroke"
+            android:id="@+id/txtRegularPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -50,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_below="@id/txtStroke"
+            android:layout_below="@id/txtRegularPrice"
             android:textSize="15sp"
             android:layout_alignParentRight="true"
             android:padding="3dp"
@@ -65,7 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/gap_M">
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/txtViewsCount"
+            android:id="@+id/txtGuestCount"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -79,7 +79,7 @@
             android:layout_height="match_parent"
             android:background="@color/divider_color" />
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/txtExpCount"
+            android:id="@+id/txtViewsCount"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -92,7 +92,7 @@
             android:layout_height="match_parent"
             android:background="@color/divider_color" />
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/txtGuestCount"
+            android:id="@+id/txtExpCount"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -121,8 +121,7 @@
             android:textColor="@android:color/white"
             android:textStyle="bold"
             android:gravity="center"
-            android:background="@drawable/round_button_background"
-            app:backgroundTint="@color/colorControlNormal"
+            android:background="@drawable/round_button_background_red"
             android:clickable="true"/>
 
     </RelativeLayout>

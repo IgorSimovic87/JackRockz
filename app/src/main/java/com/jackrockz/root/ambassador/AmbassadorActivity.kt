@@ -3,16 +3,13 @@ package com.jackrockz.root.ambassador
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.view.Gravity
 import android.view.View
 import com.jackrockz.MyApplication
 import com.jackrockz.R
-import com.jackrockz.api.CityModel
 import com.jackrockz.commons.RxBaseActivity
 import com.jackrockz.utils.GlobalConstants
 import com.jackrockz.utils.Utils
-import com.jackrockz.utils.Utils.Companion.loadObject
 import com.mancj.slideup.SlideUp
 import kotlinx.android.synthetic.main.activity_ambassador.*
 import kotlinx.android.synthetic.main.contact.*

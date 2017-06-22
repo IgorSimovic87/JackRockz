@@ -3,7 +3,6 @@ package com.jackrockz.root.events
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
@@ -11,10 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.jackrockz.MyApplication
 import com.jackrockz.R
-import com.jackrockz.api.CityModel
 import com.jackrockz.api.EventModel
 import com.jackrockz.commons.RxBaseFragment
-import com.jackrockz.utils.GlobalConstants
 import com.jackrockz.utils.Utils
 import kotlinx.android.synthetic.main.fragment_events.*
 import rx.android.schedulers.AndroidSchedulers
@@ -83,7 +80,7 @@ class EventsFragment : RxBaseFragment(), View.OnClickListener {
     }
 
     fun GetEvents() {
-        val subscription = apiManager.getEvents(MyApplication.instance.currentUser.city!!.id, myCalendar.time).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+        val subscription = apiManager.getEvents(MyApplication.instance.currentUser.city!!.id, myCalendar.time, MyApplication.instance.currentUser.country).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe (
                         { aryEvents ->
                             progressBar.visibility = View.GONE
@@ -93,7 +90,8 @@ class EventsFragment : RxBaseFragment(), View.OnClickListener {
                             }
                         },
                         { e ->
-                            Snackbar.make(view!!, e.message ?: "", Snackbar.LENGTH_LONG).show()
+                            progressBar.visibility = View.GONE
+                            Utils.showToast(activity, "Network connection error.")
                         }
                 )
         subscriptions.add(subscription)

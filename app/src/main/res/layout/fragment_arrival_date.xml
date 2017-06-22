@@ -72,7 +72,6 @@
         android:textColor="@android:color/white"
         android:textStyle="bold"
         android:gravity="center"
-        android:background="@drawable/round_button_background"
-        app:backgroundTint="@color/colorControlNormal"
+        android:background="@drawable/round_button_background_red"
         android:clickable="true"/>
 </LinearLayout>

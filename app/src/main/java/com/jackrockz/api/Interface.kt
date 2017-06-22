@@ -18,8 +18,21 @@ interface JackApi {
     fun getCities(): Call<CitiesModel>
 
     @GET("cities/{id}/events/{date}")
-    fun getEvents(@Path("id") id: Int, @Path("date") date: Date): Call<EventsModel>
+    fun getEvents(@Path("id") id: Int, @Path("date") date: Date, @Query("target_country") country: String): Call<EventsModel>
 
     @GET("ambassador/{code}")
     fun getAmbassadors(@Path("code") code: String): Call<AmbassadorsModel>
+
+    @FormUrlEncoded
+    @POST("payments/events/{id}")
+    fun postPayment(@Path("id") id: String, @Field("event_id") eventID: String, @Field("redirect_url") url: String, @Field("quantity") quantity: Int?): Call<Any>
+
+    @GET("users/me/tickets")
+    fun getTickets(): Call<TicketsModel>
+
+    @GET("payments/{token}")
+    fun getTicketToken(@Path("token") token: String, @Query("token") tokenQuery: String): Call<PaymentsModel>
+
+    @GET("users/me/tickets/{token}")
+    fun getTicket(@Path("token") token: String, @Query("token") tokenQuery: String): Call<OneTicketModel>
 }

@@ -5,6 +5,8 @@ import com.jackrockz.utils.GlobalConstants
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.http.Field
+import retrofit2.http.Path
 import java.util.*
 
 class RestApi {
@@ -37,7 +39,11 @@ class RestApi {
     fun getToken(facebook_access_token: String) = jackApi.postUser(facebook_access_token)
     fun putMe(country: String?, city: String?, arrivalDate: Date?, departureDate: Date?, ambassadorID: String?) = jackApiHeader.putMe(country, city, arrivalDate, departureDate, ambassadorID)
     fun getCities() = jackApiHeader.getCities()
-    fun getEvents(id: Int, date: Date) = jackApiHeader.getEvents(id, date)
+    fun getEvents(id: Int, date: Date, country: String) = jackApiHeader.getEvents(id, date, country)
     fun getAmbassadors(code: String) = jackApiHeader.getAmbassadors(code)
+    fun postPayment(id: String, eventID: String, url: String, quantity: Int?) = jackApiHeader.postPayment(id, eventID, url, quantity)
+    fun getTickets() = jackApiHeader.getTickets()
+    fun getTicketToken(token: String) = jackApiHeader.getTicketToken(token, token)
+    fun getTicket(token: String) = jackApiHeader.getTicket(token, token)
 
 }

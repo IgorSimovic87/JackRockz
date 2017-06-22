@@ -39,7 +39,17 @@
         <activity
             android:name=".root.events.EventPaymentActivity"
             android:screenOrientation="portrait"
-            android:label="Purchase Tickets"/>
+            android:label="Purchase Tickets">
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="payments" android:scheme="myapp"/>
+            </intent-filter>
+
+
+
+        </activity>
         <activity
             android:name=".root.tickets.TicketDetailActivity"
             android:screenOrientation="portrait"

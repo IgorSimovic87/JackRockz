@@ -40,7 +40,7 @@ class SelectCountryFragment : RxBaseFragment(), View.OnClickListener {
                             },
                             { e ->
                                 Utils.hideLoading()
-                                Snackbar.make(view!!, e.message ?: "", Snackbar.LENGTH_LONG).show()
+                                Utils.showToast(activity, "Network connection error.")
                             }
                     )
 

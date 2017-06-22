@@ -44,7 +44,9 @@ class EventModel(
         val regular_price: String,
         val venue: VenueModel,
         val start_date: String,
-        val end_date: String
+        val end_date: String,
+        val raw_price: Double,
+        val raw_prepayment_price: Double
 )
 class VenueModel(
         val name: String,
@@ -81,3 +83,37 @@ class UsersModel(
         val user: UserModel
 )
 
+
+//Payment Model
+data class PaymentsModel(
+        val payment: PaymentModel
+)
+data class PaymentModel(
+        val token: String,
+        val payment_url: String,
+        val total: String,
+        val ticket_token: String?
+)
+
+
+//Ticket Model
+class TicketsModel(
+        val tickets: List<TicketModel>
+)
+class TicketModel(
+        val token: String,
+        val first_name: String,
+        val last_name: String,
+        val email: String,
+        val quantity: Int,
+        val price: String,
+        val total: String,
+        val paid_amount: String,
+        val open_amount: String,
+        val checkin_url: String,
+        val event: EventModel
+
+)
+class OneTicketModel(
+        val ticket: TicketModel
+)

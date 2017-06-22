@@ -1,5 +1,7 @@
 package com.jackrockz.api
 
+import com.google.gson.Gson
+import org.json.JSONObject
 import rx.Observable
 import java.util.*
 
@@ -56,10 +58,10 @@ class ApiManager(private val api: RestApi = RestApi()) {
         }
     }
 
-    fun getEvents(id: Int, date: Date): Observable<List<EventModel>> {
+    fun getEvents(id: Int, date: Date, country: String): Observable<List<EventModel>> {
         return Observable.create {
             subscriber ->
-            val callResponse = api.getEvents(id, date)
+            val callResponse = api.getEvents(id, date, country)
             val response = callResponse.execute()
 
             if (response.isSuccessful) {
@@ -83,6 +85,80 @@ class ApiManager(private val api: RestApi = RestApi()) {
                 val ambassador = response.body().ambassador
 
                 subscriber.onNext(ambassador)
+                subscriber.onCompleted()
+            } else {
+                subscriber.onError(Throwable(response.message()))
+            }
+        }
+    }
+
+    fun postPayment(id: String, eventID: String, url: String, quantity: Int?): Observable<Any> {
+        return Observable.create {
+            subscriber ->
+            val callResponse = api.postPayment(id, eventID, url, quantity)
+            val response = callResponse.execute()
+
+            if (response.isSuccessful) {
+            val jsonObject = JSONObject(response.body() as Map<*, *>)
+            val output: Any
+            if (jsonObject.has("payment")) {
+                output= Gson().fromJson(jsonObject.toString(), PaymentsModel::class.java).payment
+            } else {
+                output= Gson().fromJson(jsonObject.toString(), OneTicketModel::class.java).ticket
+            }
+
+            subscriber.onNext(output)
+                subscriber.onCompleted()
+            } else {
+                subscriber.onError(Throwable(response.message()))
+            }
+        }
+    }
+
+    fun getTickets(): Observable<List<TicketModel>> {
+        return Observable.create {
+            subscriber ->
+            val callResponse = api.getTickets()
+            val response = callResponse.execute()
+
+            if (response.isSuccessful) {
+                val listTickets = response.body().tickets
+
+                subscriber.onNext(listTickets)
+                subscriber.onCompleted()
+            } else {
+                subscriber.onError(Throwable(response.message()))
+            }
+        }
+    }
+
+    fun getTicketToken(token: String): Observable<String> {
+        return Observable.create {
+            subscriber ->
+            val callResponse = api.getTicketToken(token)
+            val response = callResponse.execute()
+
+            if (response.isSuccessful) {
+                val ticketToken = response.body().payment.ticket_token
+
+                subscriber.onNext(ticketToken)
+                subscriber.onCompleted()
+            } else {
+                subscriber.onError(Throwable(response.message()))
+            }
+        }
+    }
+
+    fun getTicket(token: String): Observable<TicketModel> {
+        return Observable.create {
+            subscriber ->
+            val callResponse = api.getTicket(token)
+            val response = callResponse.execute()
+
+            if (response.isSuccessful) {
+                val ticket = response.body().ticket
+
+                subscriber.onNext(ticket)
                 subscriber.onCompleted()
             } else {
                 subscriber.onError(Throwable(response.message()))
