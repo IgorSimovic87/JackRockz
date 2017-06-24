@@ -5,15 +5,14 @@ import android.graphics.Paint
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import com.google.android.gms.maps.GoogleMap
 import com.jackrockz.MyApplication
 import com.jackrockz.R
 import com.jackrockz.api.EventModel
 import com.jackrockz.api.GalleryModel
 import com.jackrockz.commons.RxBaseActivity
+import com.jackrockz.utils.Utils
 import kotlinx.android.synthetic.main.activity_event_detail.*
 import kotlinx.android.synthetic.main.image_slider.*
-import kotlinx.android.synthetic.main.toolbar.*
 
 class EventDetailActivity : RxBaseActivity(), View.OnClickListener {
     lateinit var event: EventModel
@@ -22,11 +21,10 @@ class EventDetailActivity : RxBaseActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_detail)
 
-//        setSupportActionBar(toolbar)
-
-        supportActionBar!!.subtitle = "wahaha"
-
         event = MyApplication.instance.currentEvent
+
+        supportActionBar!!.subtitle = Utils.getStringFromTwoDates(event.start_date, event.end_date)
+
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         txtRegularPrice.paintFlags = txtRegularPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
         btnGet.setOnClickListener(this)
