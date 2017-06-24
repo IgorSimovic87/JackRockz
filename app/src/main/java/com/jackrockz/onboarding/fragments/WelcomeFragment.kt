@@ -27,7 +27,6 @@ class WelcomeFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(v: View) {
         if (v.id == R.id.btnFacebook) {
-            Utils.showLoading(activity)
             LoginManager.getInstance().logInWithReadPermissions(activity, Arrays.asList("public_profile", "email"));
         }
     }

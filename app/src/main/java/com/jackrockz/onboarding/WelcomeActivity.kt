@@ -2,12 +2,8 @@ package com.jackrockz.onboarding
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
-import android.support.v4.content.ContextCompat.startActivity
-import android.support.v4.view.GravityCompat
-import android.widget.Toast
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
@@ -25,7 +21,6 @@ import com.jackrockz.utils.GlobalConstants
 import com.jackrockz.utils.Utils
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
-import rx.subscriptions.CompositeSubscription
 
 class WelcomeActivity : RxBaseActivity() {
     var callbackManager = CallbackManager.Factory.create()
@@ -45,18 +40,14 @@ class WelcomeActivity : RxBaseActivity() {
         }
         LoginManager.getInstance().registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
             override fun onCancel() {
-                Utils.hideLoading()
             }
 
             override fun onError(p0: FacebookException?) {
-                Utils.hideLoading()
                 Utils.showToast(this@WelcomeActivity, "Unfortunately facebook login failed.")
             }
 
             override fun onSuccess(p0: LoginResult?) {
-                if (!subscriptions.hasSubscriptions()) {
-                    subscriptions = CompositeSubscription()
-                }
+                Utils.showLoading(this@WelcomeActivity)
                 ProcessToken(p0!!.accessToken.token)
             }
         })
@@ -81,7 +72,7 @@ class WelcomeActivity : RxBaseActivity() {
                         },
                         { e ->
                             Utils.hideLoading()
-                            Utils.showToast(this@WelcomeActivity, "Unfortunately facebook login failed.")
+                            Utils.showToast(this@WelcomeActivity, "Connection Error.")
                         }
                 )
 

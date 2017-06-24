@@ -27,25 +27,22 @@ class SelectCityFragment : RxBaseFragment(), View.OnClickListener {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        progressBar.visibility = View.VISIBLE
+        val subscription = apiManager.getCities().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe (
+                        { aryCities ->
+                            progressBar.visibility = View.GONE
 
-        if (listItems.size == 0) {
-            progressBar.visibility = View.VISIBLE
-            val subscription = apiManager.getCities().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                    .subscribe (
-                            { aryCities ->
-                                progressBar.visibility = View.GONE
+                            listItems = aryCities as ArrayList<CityModel>
+                            recycler_view.adapter = CityAdapter(this, listItems)
+                        },
+                        { e ->
+                            progressBar.visibility = View.GONE
+                            Utils.showToast(activity, "Network connection error.")
+                        }
+                )
+        subscriptions.add(subscription)
 
-                                listItems = aryCities as ArrayList<CityModel>
-                                recycler_view.adapter = CityAdapter(this, listItems)
-                            },
-                            { e ->
-                                progressBar.visibility = View.GONE
-                                Utils.showToast(activity, "Network connection error.")
-                            }
-                    )
-            subscriptions.add(subscription)
-
-        }
         recycler_view.apply {
             setHasFixedSize(true)
             val linearLayout = LinearLayoutManager(context)
