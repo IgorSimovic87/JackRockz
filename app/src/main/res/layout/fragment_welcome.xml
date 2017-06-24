@@ -27,7 +27,8 @@
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="@dimen/gap_super"
-            android:textSize="40sp"
+            style="@style/Oswald_BoldFont"
+            android:textSize="45sp"
             android:gravity="center"
             android:textStyle="bold"
             android:textColor="@android:color/white"/>

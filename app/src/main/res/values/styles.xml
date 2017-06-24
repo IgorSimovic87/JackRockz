@@ -17,7 +17,21 @@
 
         <!--EditText Style-->
         <item name="editTextStyle">@style/My_EditTextStyle</item>
+
+        <item name="actionBarStyle">@style/My_ActionBar_Solid</item>
     </style>
+
+    <style name="My_ActionBar_Solid" parent="@style/Widget.AppCompat.Light.ActionBar.Solid">
+        <item name="titleTextStyle">@style/My_ActionBar_TitleTextStyle</item>
+        <item name="subtitleTextStyle">@style/My_ActionBar_SubTitleTextStyle</item>
+    </style>
+    <style name="My_ActionBar_TitleTextStyle" parent="Base.TextAppearance.AppCompat.Widget.ActionBar.Title">
+    </style>
+
+    <style name="My_ActionBar_SubTitleTextStyle" parent="Base.TextAppearance.AppCompat.Widget.ActionBar.Subtitle">
+        <item name="android:textSize">14sp</item>
+    </style>
+
 
     <style name="My_EditTextStyle" parent="Widget.AppCompat.EditText">
         <item name="android:maxLines">1</item>
@@ -34,5 +48,12 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/rating_inactive_color</item>
+        <item name="colorControlActivated">@color/rating_active_color</item>
+    </style>
+
 
 </resources>

@@ -11,17 +11,20 @@
         android:padding="@dimen/gap_M"
         android:orientation="vertical">
 
-        <fragment
-            android:id="@+id/map"
-            android:name="com.google.android.gms.maps.MapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
+            style="@style/Oswald_BoldFont"
             android:text="Location" />
+
+        <fragment
+            xmlns:tools="http://schemas.android.com/tools"
+            tools:context=".root.events.EventDetailActivity"
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"/>
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/txtVenueName"
@@ -45,7 +48,17 @@
             android:id="@+id/txtVenueCity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/gap_M"
             android:layout_marginTop="@dimen/gap_S"
+            android:textColor="#535353"
+            android:textSize="19sp"
+            android:text="Pacha" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/txtVenueNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/gap_XXL"
             android:textColor="#535353"
             android:textSize="19sp"
             android:text="Pacha" />

@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/gap_XL"
         android:layout_marginBottom="@dimen/gap_XL"
-        android:textStyle="bold"
+        style="@style/Oswald_BoldFont"
         android:textSize="30sp"
         android:layout_gravity="center_horizontal"
         android:text="@string/title_city_selection"/>

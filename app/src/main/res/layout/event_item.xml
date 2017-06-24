@@ -40,7 +40,7 @@
                 android:paddingRight="6dp"
                 android:background="@drawable/round_text_background"
                 android:text="45 LEFT"
-                android:textStyle="bold" />
+                style="@style/Oswald_SemiBoldFont" />
 
             <View
                 android:layout_width="wrap_content"
@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/white"
                 android:textSize="27sp"
-                android:textStyle="bold"
+                style="@style/Oswald_BoldFont"
                 android:text="No Highway" />
 
             <android.support.v7.widget.AppCompatTextView
@@ -63,7 +63,7 @@
                 android:layout_marginTop="3dp"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"
-                android:textStyle="bold"
+                style="@style/Oswald_BoldFont"
                 android:text="Two for one!" />
 
             <android.support.v7.widget.AppCompatTextView
@@ -73,7 +73,7 @@
                 android:layout_marginTop="3dp"
                 android:textColor="#e7e9eb"
                 android:textSize="15sp"
-                android:textStyle="bold"
+                style="@style/Oswald_SemiBoldFont"
                 android:text="TIME TO MURDER AND CREATE" />
 
         </LinearLayout>

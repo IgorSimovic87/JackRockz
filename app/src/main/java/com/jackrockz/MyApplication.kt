@@ -26,11 +26,11 @@ class MyApplication : Application() {
 
         instance = this
 
-        CalligraphyConfig.initDefault(CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/oswald_regular.ttf")
-                .setFontAttrId(R.attr.fontPath)
-                .build()
-        )
+//        CalligraphyConfig.initDefault(CalligraphyConfig.Builder()
+//                .setDefaultFontPath("fonts/oswald_regular.ttf")
+//                .setFontAttrId(R.attr.fontPath)
+//                .build()
+//        )
     }
 
 }

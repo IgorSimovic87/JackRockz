@@ -1,6 +1,8 @@
 package com.jackrockz.root.events
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.support.v4.view.PagerAdapter
 import android.support.v7.widget.AppCompatImageView
 import android.view.LayoutInflater
@@ -9,6 +11,9 @@ import android.view.ViewGroup
 import com.jackrockz.R
 import com.jackrockz.api.GalleryModel
 import com.jackrockz.commons.extensions.loadImg
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
+import com.squareup.picasso.Target
 import java.util.*
 
 class ImagePagerAdapter(val context: Context, val items: ArrayList<GalleryModel>) : PagerAdapter() {
@@ -24,8 +29,7 @@ class ImagePagerAdapter(val context: Context, val items: ArrayList<GalleryModel>
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val cell = inflater.inflate(R.layout.image_item, null)
 
-        val imageUrl = gallery.image!!.medium
-        (cell.findViewById(R.id.imgView) as AppCompatImageView).loadImg(imageUrl)
+        (cell.findViewById(R.id.imgView) as AppCompatImageView).loadImg(gallery.image!!.medium)
 
         view.addView(cell, ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
         return cell

@@ -12,8 +12,11 @@ import com.jackrockz.MyApplication
 import com.jackrockz.R
 import com.jackrockz.api.EventModel
 import com.jackrockz.commons.RxBaseFragment
+import com.jackrockz.root.MainActivity
 import com.jackrockz.utils.Utils
 import kotlinx.android.synthetic.main.fragment_events.*
+import kotlinx.android.synthetic.main.toolbar.*
+import kotlinx.android.synthetic.main.toolbar.view.*
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import java.text.SimpleDateFormat

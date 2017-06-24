@@ -22,7 +22,7 @@
     <string name="content_purchase">You will be redirected to the payment page where you\ncan securely perform the payment using iDeal, Creditcard\nor Paypal.</string>
 
     <string-array name="nav_item_activity_titles">
-        <item>Events</item>
+        <item />
         <item>My Tickets</item>
         <item>Support</item>
     </string-array>
@@ -34,4 +34,5 @@
     <string name="msg_facebook">Unfortunately facebook login failed.</string>
     <string name="string_thank_you">Here\'s your ticket. Show this at the\ndoor when the event starts.\n\nThe ticket has been saved to \'My\nTickets\'.</string>
     <string name="google_api_key">AIzaSyAxQ47BG5yQ3e-Hm07rbKXOuKO-ImZq6_s</string>
+    <string name="who_s_there">Who\'s there?</string>
 </resources>

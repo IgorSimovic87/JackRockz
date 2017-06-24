@@ -31,10 +31,14 @@ class MyTicketsFragment : RxBaseFragment(), View.OnClickListener {
         val subscription = apiManager.getTickets().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe (
                         { aryTickets ->
-                            progressBar.visibility = View.GONE
+                            try {
+                                progressBar.visibility = View.GONE
 
-                            listItems = aryTickets as ArrayList<TicketModel>
-                            recycler_view.adapter = TicketsAdapter(this, listItems)
+                                listItems = aryTickets as ArrayList<TicketModel>
+                                recycler_view.adapter = TicketsAdapter(this, listItems)
+                            } catch (ignored: Exception) {
+
+                            }
                         },
                         { e ->
                             progressBar.visibility = View.GONE

@@ -12,15 +12,16 @@
         android:orientation="vertical">
 
         <android.support.v7.widget.AppCompatTextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:text="Who's there" />
+            style="@style/Oswald_BoldFont"
+            android:text="@string/who_s_there" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/who_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="50dp" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <include layout="@layout/divider" />

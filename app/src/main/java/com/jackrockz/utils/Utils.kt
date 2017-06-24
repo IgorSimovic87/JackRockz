@@ -58,7 +58,7 @@ class Utils {
         fun <T> loadObject(key: String, cls: Class<T>) = Gson().fromJson(loadData(key), cls)
 
         fun convertStringToDate(string: String, outFormat: String): String {
-            val outputFormat = SimpleDateFormat(outFormat, Locale.US)
+            val outputFormat = SimpleDateFormat(outFormat, Locale.getDefault())
 
             val parsed = inputFormat.parse(string)
             return outputFormat.format(parsed)

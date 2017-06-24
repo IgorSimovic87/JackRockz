@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/gap_XL"
         android:textSize="25sp"
+        style="@style/Oswald_BoldFont"
         android:layout_gravity="center_horizontal"
         android:text="@string/title_country_selection"/>
 
@@ -35,6 +36,7 @@
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/Oswald_SemiBoldFont"
             android:layout_marginLeft="@dimen/gap_XL"
             android:text="Germany"/>
     </LinearLayout>
@@ -60,6 +62,7 @@
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/Oswald_SemiBoldFont"
             android:layout_marginLeft="@dimen/gap_XL"
             android:text="France"/>
     </LinearLayout>
@@ -86,7 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/gap_XL"
-            android:textStyle="bold"
+            style="@style/Oswald_SemiBoldFont"
             android:text="Italy"/>
     </LinearLayout>
 
@@ -112,7 +115,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/gap_XL"
-            android:textStyle="bold"
+            style="@style/Oswald_SemiBoldFont"
             android:text="Netherlands"/>
     </LinearLayout>
 
@@ -138,7 +141,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/gap_XL"
-            android:textStyle="bold"
+            style="@style/Oswald_SemiBoldFont"
             android:text="Other"/>
     </LinearLayout>
 </LinearLayout>

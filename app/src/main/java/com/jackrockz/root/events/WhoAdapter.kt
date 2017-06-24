@@ -6,11 +6,9 @@ import com.jackrockz.R
 import com.jackrockz.api.VisitorModel
 import com.jackrockz.commons.extensions.inflate
 import com.jackrockz.commons.extensions.loadImg
+import com.squareup.picasso.Callback
 import kotlinx.android.synthetic.main.who_image_item.view.*
 
-/**
- * Created by minnie on 6/24/17.
- */
 class WhoAdapter(val activity: EventDetailActivity, val items: ArrayList<VisitorModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun getItemCount(): Int = items.size
 
@@ -23,10 +21,19 @@ class WhoAdapter(val activity: EventDetailActivity, val items: ArrayList<Visitor
 
     inner class VisitorHolder(parent: ViewGroup) : RecyclerView.ViewHolder(parent.inflate(R.layout.who_image_item)) {
         fun bind(item: VisitorModel) = with(itemView) {
-            imgView.loadImg(item.image)
+            imgView.loadImg(item.image, object: Callback {
+                override fun onSuccess() {
+                }
 
-            tag = item
-            setOnClickListener (activity)
+                override fun onError() {
+                    items.remove(item)
+                    notifyDataSetChanged()
+                }
+
+            })
+
+            imgWho.tag = item
+            imgWho.setOnClickListener (activity)
         }
     }
 }

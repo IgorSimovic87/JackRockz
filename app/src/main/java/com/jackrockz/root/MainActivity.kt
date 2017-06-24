@@ -6,7 +6,6 @@ import android.os.Handler
 import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
 import android.view.View
 import android.widget.TextView
@@ -22,6 +21,7 @@ import com.jackrockz.root.tickets.MyTicketsFragment
 import com.jackrockz.utils.GlobalConstants
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
+import kotlinx.android.synthetic.main.toolbar.view.*
 
 class MainActivity : RxBaseActivity() {
     @JvmField var navItemIndex = 0
@@ -50,6 +50,7 @@ class MainActivity : RxBaseActivity() {
         setUpNavigationView()
 
         if (isFromPayment) {
+            toolbar.imgLogo.visibility = View.GONE
             navItemIndex = 1
             CURRENT_TAG = "my tickets"
             loadHomeFragment()
@@ -100,13 +101,16 @@ class MainActivity : RxBaseActivity() {
             when (menuItem.itemId) {
                 R.id.nav_events -> {
                     navItemIndex = 0
+                    toolbar.imgLogo.visibility = View.VISIBLE
                     CURRENT_TAG = "events"
                 }
                 R.id.nav_mytickets -> {
                     navItemIndex = 1
+                    toolbar.imgLogo.visibility = View.GONE
                     CURRENT_TAG = "my tickets"
                 }
                 R.id.nav_support -> {
+                    toolbar.imgLogo.visibility = View.GONE
                     navItemIndex = 2
                     CURRENT_TAG = "support"
                 }

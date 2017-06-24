@@ -8,13 +8,14 @@
     android:paddingBottom="@dimen/gap_M">
 
     <com.jackrockz.utils.TapOpacityHighlightLayout
+        android:id="@+id/imgWho"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/imgView"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:scaleType="centerCrop"
             android:src="@drawable/welcome_background1" />
 

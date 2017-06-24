@@ -10,8 +10,16 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:background="#000"
         app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/imgLogo"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:layout_gravity="center"
+            android:src="@drawable/logo" />
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/btnClose"
