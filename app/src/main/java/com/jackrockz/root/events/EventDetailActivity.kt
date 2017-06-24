@@ -3,16 +3,22 @@ package com.jackrockz.root.events
 import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
+import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
 import android.view.View
 import com.jackrockz.MyApplication
 import com.jackrockz.R
 import com.jackrockz.api.EventModel
 import com.jackrockz.api.GalleryModel
+import com.jackrockz.api.VisitorModel
 import com.jackrockz.commons.RxBaseActivity
+import com.jackrockz.onboarding.adapter.CityAdapter
 import com.jackrockz.utils.Utils
 import kotlinx.android.synthetic.main.activity_event_detail.*
+import kotlinx.android.synthetic.main.description.*
 import kotlinx.android.synthetic.main.image_slider.*
+import kotlinx.android.synthetic.main.who_layout.*
 
 class EventDetailActivity : RxBaseActivity(), View.OnClickListener {
     lateinit var event: EventModel
@@ -36,6 +42,18 @@ class EventDetailActivity : RxBaseActivity(), View.OnClickListener {
         txtGuestCount.text = event.guestlist_count.toString() + "x"
         txtPrice.text = event.price
         txtRegularPrice.text = event.regular_price
+        txtDescription.text = event.description
+
+        if (event.visitors != null) {
+            layout_who.visibility = View.VISIBLE
+            who_recycler_view.apply {
+                setHasFixedSize(true)
+                val linearLayout = LinearLayoutManager(context)
+                linearLayout.orientation = LinearLayoutManager.HORIZONTAL
+                layoutManager = linearLayout
+                adapter = WhoAdapter(this@EventDetailActivity, event.visitors as ArrayList<VisitorModel>)
+            }
+        }
 
         if (event.gallery?.items != null) {
             viewpager.adapter = ImagePagerAdapter(this, event.gallery!!.items!! as ArrayList<GalleryModel>)
@@ -65,8 +83,13 @@ class EventDetailActivity : RxBaseActivity(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        startActivity(Intent(this, EventPaymentActivity::class.java))
-        this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left)
+        when (v!!.id) {
+            R.id.btnGet -> {
+                startActivity(Intent(this, EventPaymentActivity::class.java))
+                this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left)
+            }
+
+        }
     }
 
     override fun onBackPressed() {

@@ -47,7 +47,8 @@ class EventModel(
         val end_date: String,
         val raw_price: Double,
         val raw_prepayment_price: Double,
-        val gallery: GalleriesModel?
+        val gallery: GalleriesModel?,
+        val visitors: List<VisitorModel>?
 )
 class VenueModel(
         val name: String,
@@ -58,6 +59,12 @@ class GalleriesModel(
 )
 class GalleryModel(
         val image: HashImage?
+)
+class VisitorModel(
+        val first_name: String,
+        val last_name: String,
+        val link: String,
+        val image: String
 )
 
 

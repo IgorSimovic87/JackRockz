@@ -161,7 +161,10 @@
 
         <include layout="@layout/divider" />
         <include layout="@layout/description"/>
-        <include layout="@layout/who_layout"/>
+        <include
+            android:id="@+id/layout_who"
+            android:visibility="gone"
+            layout="@layout/who_layout"/>
         <include layout="@layout/review_layout"/>
         <include layout="@layout/location"/>
     </LinearLayout>
