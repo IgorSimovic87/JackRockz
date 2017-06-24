@@ -5,6 +5,8 @@ import android.graphics.Paint
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
+import com.celerysoft.imagepager.adapter.SimpleImagePagerAdapter
 import com.jackrockz.MyApplication
 import com.jackrockz.R
 import com.jackrockz.api.EventModel
@@ -13,6 +15,9 @@ import com.jackrockz.commons.RxBaseActivity
 import com.jackrockz.utils.Utils
 import kotlinx.android.synthetic.main.activity_event_detail.*
 import kotlinx.android.synthetic.main.image_slider.*
+import com.celerysoft.imagepager.animation.DepthPageTransformer
+
+
 
 class EventDetailActivity : RxBaseActivity(), View.OnClickListener {
     lateinit var event: EventModel
@@ -38,8 +43,18 @@ class EventDetailActivity : RxBaseActivity(), View.OnClickListener {
         txtRegularPrice.text = event.regular_price
 
         if (event.gallery?.items != null) {
-            viewpager.adapter = ImagePagerAdapter(this, event.gallery!!.items!! as ArrayList<GalleryModel>)
-            indicator.setViewPager(viewpager)
+//            viewpager.adapter = ImagePagerAdapter(this, event.gallery!!.items!! as ArrayList<GalleryModel>)
+//            indicator.setViewPager(viewpager)
+
+            viewpager.setPageTransformer(true, DepthPageTransformer())
+            viewpager.adapter = SimpleImagePagerAdapter(this).apply {
+                scaleType = ImageView.ScaleType.CENTER_INSIDE
+                images = ArrayList<SimpleImagePagerAdapter.Image>(
+                        event.gallery!!.items!!.map {
+                            val imageUrl = it.image!!.medium
+                            SimpleImagePagerAdapter.Image().apply { setImageUrl(imageUrl) }
+                        })
+            }
         }
         supportActionBar!!.title = event.venue.name
 
