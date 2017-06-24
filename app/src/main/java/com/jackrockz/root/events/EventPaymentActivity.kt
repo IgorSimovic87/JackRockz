@@ -63,6 +63,11 @@ class EventPaymentActivity : RxBaseActivity(), View.OnClickListener {
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right)
+    }
+
     override fun onClick(v: View?) {
         when(v!!.id) {
             R.id.txtQuantity -> OnQuantity()

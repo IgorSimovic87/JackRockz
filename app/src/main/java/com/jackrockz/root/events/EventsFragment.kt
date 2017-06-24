@@ -52,7 +52,7 @@ class EventsFragment : RxBaseFragment(), View.OnClickListener {
                 }
             }
             layoutManager = layout
-            addItemDecoration(DividerItemDecoration(context, layout.orientation))
+            addItemDecoration(SpacesItemDecoration(5))
             adapter = EventsAdapter(this@EventsFragment, listItems)
         }
     }
@@ -66,6 +66,7 @@ class EventsFragment : RxBaseFragment(), View.OnClickListener {
             else -> {
                 MyApplication.instance.currentEvent = v.tag as EventModel
                 startActivity(Intent(activity, EventDetailActivity::class.java))
+                activity.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left)
             }
         }
     }

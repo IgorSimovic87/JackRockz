@@ -1,8 +1,10 @@
 package com.jackrockz.commons
 
+import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import com.jackrockz.api.ApiManager
 import rx.subscriptions.CompositeSubscription
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
 open class RxBaseActivity : AppCompatActivity() {
     protected var subscriptions = CompositeSubscription()
@@ -19,6 +21,11 @@ open class RxBaseActivity : AppCompatActivity() {
             subscriptions.unsubscribe()
         }
         subscriptions.clear()
+    }
+
+    override fun attachBaseContext(newBase: Context?) {
+        // Custom Font
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
     }
 
 }

@@ -10,7 +10,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/gap_XL"
-        android:textStyle="bold"
         android:textSize="25sp"
         android:layout_gravity="center_horizontal"
         android:text="@string/title_country_selection"/>
@@ -37,7 +36,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/gap_XL"
-            android:textStyle="bold"
             android:text="Germany"/>
     </LinearLayout>
 
@@ -63,7 +61,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/gap_XL"
-            android:textStyle="bold"
             android:text="France"/>
     </LinearLayout>
 

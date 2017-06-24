@@ -46,11 +46,18 @@ class EventModel(
         val start_date: String,
         val end_date: String,
         val raw_price: Double,
-        val raw_prepayment_price: Double
+        val raw_prepayment_price: Double,
+        val gallery: GalleriesModel?
 )
 class VenueModel(
         val name: String,
         val city: String
+)
+class GalleriesModel(
+        val items: List<GalleryModel>?
+)
+class GalleryModel(
+        val image: HashImage?
 )
 
 

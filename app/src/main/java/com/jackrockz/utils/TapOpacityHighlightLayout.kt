@@ -37,13 +37,18 @@ class TapOpacityHighlightLayout @JvmOverloads constructor(
                 }
             }
 
-            MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+            MotionEvent.ACTION_UP -> {
                 if (isSemiAlpha) {
                     animateAlpha(1f)
                     if (isClickable)
                         performClick()
                     else
                         getChildAt(0).callOnClick()
+                }
+            }
+            MotionEvent.ACTION_CANCEL -> {
+                if (isSemiAlpha) {
+                    animateAlpha(1f)
                 }
             }
         }

@@ -5,6 +5,9 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -47,8 +50,6 @@
                 <data android:host="payments" android:scheme="myapp"/>
             </intent-filter>
 
-
-
         </activity>
         <activity
             android:name=".root.tickets.TicketDetailActivity"
@@ -56,6 +57,10 @@
             android:label="Ticket" />
 
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_api_key"/>
     </application>
 
 </manifest>

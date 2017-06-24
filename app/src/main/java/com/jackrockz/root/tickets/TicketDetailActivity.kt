@@ -10,12 +10,13 @@ import com.google.zxing.BarcodeFormat
 import com.google.zxing.qrcode.QRCodeWriter
 import com.jackrockz.MyApplication
 import com.jackrockz.R
+import com.jackrockz.commons.RxBaseActivity
 import com.jackrockz.root.MainActivity
 import com.jackrockz.utils.GlobalConstants
 import com.jackrockz.utils.Utils
 import kotlinx.android.synthetic.main.activity_ticket_detail.*
 
-class TicketDetailActivity : AppCompatActivity() {
+class TicketDetailActivity : RxBaseActivity() {
     val ticket = MyApplication.instance.currentTicket
     var isFromPayment = false
 

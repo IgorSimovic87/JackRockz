@@ -67,4 +67,13 @@ dependencies {
 
     // Jackson Data
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.8.9'
+
+    // Custom Font
+    implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
+
+    // CircleIndicator
+    implementation 'me.relex:circleindicator:1.2.2@aar'
+
+    // Map
+    implementation 'com.google.android.gms:play-services-maps:11.0.1'
 }

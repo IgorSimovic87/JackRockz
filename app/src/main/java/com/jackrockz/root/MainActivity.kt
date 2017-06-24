@@ -13,6 +13,7 @@ import android.widget.TextView
 import com.facebook.login.LoginManager
 import com.jackrockz.MyApplication
 import com.jackrockz.R
+import com.jackrockz.commons.RxBaseActivity
 import com.jackrockz.onboarding.WelcomeActivity
 import com.jackrockz.root.ambassador.AmbassadorActivity
 import com.jackrockz.root.events.EventsFragment
@@ -22,7 +23,7 @@ import com.jackrockz.utils.GlobalConstants
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : RxBaseActivity() {
     @JvmField var navItemIndex = 0
     @JvmField var CURRENT_TAG = "events"
     var mHandler: Handler = Handler()
@@ -83,11 +84,11 @@ class MainActivity : AppCompatActivity() {
 
         val mPendingRunnable = Runnable {
             val fragment = getHomeFragment()
-            val ft = supportFragmentManager.beginTransaction();
+            val ft = supportFragmentManager.beginTransaction()
             ft.setCustomAnimations(
-                    R.anim.abc_fade_in, R.anim.abc_fade_out, R.anim.abc_popup_enter, R.anim.abc_popup_exit);
-            ft.replace(R.id.activity_base_content, fragment, CURRENT_TAG);
-            ft.commitAllowingStateLoss();
+                    R.anim.abc_fade_in, R.anim.abc_fade_out, R.anim.abc_popup_enter, R.anim.abc_popup_exit)
+            ft.replace(R.id.activity_base_content, fragment, CURRENT_TAG)
+            ft.commitAllowingStateLoss()
         }
         mHandler.post(mPendingRunnable)
         drawer_layout.closeDrawers()
@@ -161,13 +162,7 @@ class MainActivity : AppCompatActivity() {
             drawer_layout.closeDrawers()
             return
         }
-
-        if (navItemIndex != 0) {
-            navItemIndex = 0
-            CURRENT_TAG = "events"
-            loadHomeFragment()
-            return
-        }
+        
         super.onBackPressed()
     }
 

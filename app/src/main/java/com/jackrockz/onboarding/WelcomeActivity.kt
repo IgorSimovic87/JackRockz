@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.content.ContextCompat.startActivity
+import android.support.v4.view.GravityCompat
 import android.widget.Toast
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
@@ -28,6 +29,7 @@ import rx.subscriptions.CompositeSubscription
 
 class WelcomeActivity : RxBaseActivity() {
     var callbackManager = CallbackManager.Factory.create()
+    var onBackPressedListener: MainActivity.OnBackPressedListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,10 +41,11 @@ class WelcomeActivity : RxBaseActivity() {
     fun InitFlow() {
         if (AccessToken.getCurrentAccessToken() != null) {
             ProcessToken(AccessToken.getCurrentAccessToken().token, true)
-            return;
+            return
         }
         LoginManager.getInstance().registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
             override fun onCancel() {
+                Utils.hideLoading()
             }
 
             override fun onError(p0: FacebookException?) {
@@ -73,7 +76,7 @@ class WelcomeActivity : RxBaseActivity() {
                             if (isLogged) {
                                 gotoNextActivity()
                             } else {
-                                changeFragment(SelectCountryFragment(), true)
+                                changeFragment(SelectCountryFragment())
                             }
                         },
                         { e ->
@@ -86,22 +89,22 @@ class WelcomeActivity : RxBaseActivity() {
     }
 
     fun changeFragment(f: Fragment, cleanStack: Boolean = false) {
-        val ft = supportFragmentManager.beginTransaction();
+        val ft = supportFragmentManager.beginTransaction()
         if (cleanStack) {
-            clearBackStack();
+            clearBackStack()
         }
         ft.setCustomAnimations(
-                R.anim.abc_fade_in, R.anim.abc_fade_out, R.anim.abc_popup_enter, R.anim.abc_popup_exit);
-        ft.replace(R.id.activity_base_content, f);
-        ft.addToBackStack(null);
-        ft.commit();
+                R.anim.abc_fade_in, R.anim.abc_fade_out, R.anim.abc_popup_enter, R.anim.abc_popup_exit)
+        ft.add(R.id.activity_base_content, f)
+        ft.addToBackStack(null)
+        ft.commit()
     }
 
     fun clearBackStack() {
-        val manager = supportFragmentManager;
+        val manager = supportFragmentManager
         if (manager.backStackEntryCount > 0) {
-            val first = manager.getBackStackEntryAt(0);
-            manager.popBackStack(first.id, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            val first = manager.getBackStackEntryAt(0)
+            manager.popBackStack(first.id, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         }
     }
 
@@ -113,11 +116,16 @@ class WelcomeActivity : RxBaseActivity() {
     }
 
     override fun onBackPressed() {
-        val fragmentManager = supportFragmentManager;
+        if (onBackPressedListener != null) {
+            onBackPressedListener!!.doBack()
+            return
+        }
+
+        val fragmentManager = supportFragmentManager
         if (fragmentManager.backStackEntryCount > 1) {
-            fragmentManager.popBackStack();
+            fragmentManager.popBackStack()
         } else {
-            finish();
+            finish()
         }
     }
 

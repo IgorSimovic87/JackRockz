@@ -53,11 +53,6 @@ class SupportFragment : Fragment(), View.OnClickListener, MainActivity.OnBackPre
                 .build()
     }
 
-    override fun onDestroy() {
-        (activity as MainActivity).onBackPressedListener = null
-        super.onDestroy()
-    }
-
     override fun onClick(v: View) {
         when(v.id) {
             R.id.btnContact -> slideUp.show()
@@ -75,6 +70,11 @@ class SupportFragment : Fragment(), View.OnClickListener, MainActivity.OnBackPre
             (activity as MainActivity).onBackPressedListener = null
             activity.onBackPressed()
         }
+    }
+
+    override fun onDestroyView() {
+        (activity as MainActivity).onBackPressedListener = null
+        super.onDestroyView()
     }
 
     fun CallPhone() {

@@ -7,15 +7,25 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/loginLayout"
-        android:background="@drawable/welcome_background3">
+        android:layout_above="@+id/loginLayout">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/welcome_background3"
+            android:scaleType="centerCrop" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/trending_gradient_shape" />
 
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/logo_text"
-            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
             android:layout_marginBottom="@dimen/gap_super"
             android:textSize="40sp"
             android:gravity="center"
