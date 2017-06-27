@@ -5,4 +5,5 @@ object GlobalConstants {
     val PREFS_NAME = "JackRockz"
     val PREFS_USER = "User"
     val PREFS_ISFROMPAYMENT = "IsFromPayment"
+    val PREFS_IS_USER_INITIALIZED = "IsUserInitialized"
 }

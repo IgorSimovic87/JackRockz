@@ -11,7 +11,6 @@ import com.jackrockz.R
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
-
 fun ViewGroup.inflate(layoutId: Int, attachToRoot: Boolean = false): View {
     return LayoutInflater.from(context).inflate(layoutId, this, attachToRoot)
 }

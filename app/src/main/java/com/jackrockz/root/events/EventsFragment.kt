@@ -23,7 +23,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class EventsFragment : RxBaseFragment(), View.OnClickListener {
+class EventsFragment(val isHot: Boolean = false) : RxBaseFragment(), View.OnClickListener {
     val myCalendar = Calendar.getInstance()
     val date = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
         myCalendar.set(year, month, dayOfMonth, 0, 0)
@@ -40,6 +40,10 @@ class EventsFragment : RxBaseFragment(), View.OnClickListener {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (isHot) {
+            btnDate.visibility = View.GONE
+        }
+
         GetEvents()
         updateLabel()
 
@@ -55,7 +59,7 @@ class EventsFragment : RxBaseFragment(), View.OnClickListener {
                 }
             }
             layoutManager = layout
-            addItemDecoration(SpacesItemDecoration(5))
+            addItemDecoration(SpacesItemDecoration(2))
             adapter = EventsAdapter(this@EventsFragment, listItems)
         }
     }
@@ -84,20 +88,38 @@ class EventsFragment : RxBaseFragment(), View.OnClickListener {
     }
 
     fun GetEvents() {
-        val subscription = apiManager.getEvents(MyApplication.instance.currentUser.city!!.id, myCalendar.time, MyApplication.instance.currentUser.country).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe (
-                        { aryEvents ->
-                            progressBar.visibility = View.GONE
-                            aryEvents?.let {
-                                listItems = aryEvents as ArrayList<EventModel>
-                                recycler_view.adapter = EventsAdapter(this, listItems)
+        if (isHot) {
+            val subscription = apiManager.getFeaturedEvents(MyApplication.instance.currentUser.city!!.id, MyApplication.instance.currentUser.country).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                    .subscribe (
+                            { aryEvents ->
+                                progressBar.visibility = View.GONE
+                                aryEvents?.let {
+                                    listItems = aryEvents as ArrayList<EventModel>
+                                    recycler_view.adapter = EventsAdapter(this, listItems)
+                                }
+                            },
+                            { e ->
+                                progressBar.visibility = View.GONE
+                                Utils.showToast(activity, "Network connection error.")
                             }
-                        },
-                        { e ->
-                            progressBar.visibility = View.GONE
-                            Utils.showToast(activity, "Network connection error.")
-                        }
-                )
-        subscriptions.add(subscription)
+                    )
+            subscriptions.add(subscription)
+        } else {
+            val subscription = apiManager.getEvents(MyApplication.instance.currentUser.city!!.id, myCalendar.time, MyApplication.instance.currentUser.country).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                    .subscribe (
+                            { aryEvents ->
+                                progressBar.visibility = View.GONE
+                                aryEvents?.let {
+                                    listItems = aryEvents as ArrayList<EventModel>
+                                    recycler_view.adapter = EventsAdapter(this, listItems)
+                                }
+                            },
+                            { e ->
+                                progressBar.visibility = View.GONE
+                                Utils.showToast(activity, "Network connection error.")
+                            }
+                    )
+            subscriptions.add(subscription)
+        }
     }
 }

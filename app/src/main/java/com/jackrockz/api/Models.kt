@@ -51,7 +51,8 @@ class EventModel(
         val visitors: List<VisitorModel>?,
         val reviews: List<ReviewModel>,
         val note: String?,
-        val is_sold_out: Boolean
+        val is_sold_out: Boolean,
+        val supplementary_subtitle: String
 )
 class VenueModel(
         val name: String,
@@ -103,6 +104,7 @@ class UserModel(
         val country: String,
         val arrival_date: String?,
         val departure_date: String?,
+        val gender: String?,
         val city: CityModel?,
         val ambassador: AmbassadorModel?
 )

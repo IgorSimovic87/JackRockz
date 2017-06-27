@@ -1,5 +1,7 @@
 package com.jackrockz.root.events
 
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
@@ -28,8 +30,18 @@ class EventsAdapter(val fragment: EventsFragment, val items: ArrayList<EventMode
             } else {
                 txtSubTitle.text = item.subtitle
             }
-            txtDescription.text = item.venue.name
-            txtLeft.text = item.guestlist_count.toString() + " LEFT"
+            txtDescription.text = item.venue.name.toUpperCase()
+
+            txtLeft.text = if (item.is_sold_out) {
+                txtLeft.background.setColorFilter(resources.getColor(R.color.sold_out_color), PorterDuff.Mode.SRC_ATOP);
+                txtLeft.setTextColor(Color.WHITE)
+                "SOLD OUT"
+            }
+            else if (item.raw_price == 0.0)
+                "FREE"
+            else
+                item.guestlist_count.toString() + " LEFT"
+
             item.image?.let{imgView.loadImg(item.image.medium)}
             tag = item
             setOnClickListener (fragment)

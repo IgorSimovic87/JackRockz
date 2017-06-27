@@ -39,7 +39,10 @@
         android:id="@id/loginLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/gap_super"
+        android:paddingTop="@dimen/gap_super"
+        android:paddingBottom="@dimen/gap_super"
+        android:paddingLeft="@dimen/gap_XXXL"
+        android:paddingRight="@dimen/gap_XXXL"
         android:layout_alignParentBottom="true">
 
         <android.support.v7.widget.AppCompatTextView

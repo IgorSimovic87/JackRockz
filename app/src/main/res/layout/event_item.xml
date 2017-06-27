@@ -7,7 +7,7 @@
     <RelativeLayout
         android:id="@+id/itemEvent"
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="220dp">
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/imgView"
@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingLeft="@dimen/gap_L"
+            android:paddingLeft="@dimen/gap_M"
             android:paddingBottom="@dimen/gap_L">
 
             <android.support.v7.widget.AppCompatTextView
@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:textSize="14sp"
+                android:textSize="9sp"
                 android:paddingTop="3dp"
                 android:paddingBottom="3dp"
                 android:paddingLeft="6dp"
@@ -52,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/white"
-                android:textSize="27sp"
+                android:textSize="18sp"
                 style="@style/Oswald_BoldFont"
                 android:text="No Highway" />
 
@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 android:textColor="@android:color/white"
-                android:textSize="20sp"
+                android:textSize="13sp"
                 style="@style/Oswald_BoldFont"
                 android:text="Two for one!" />
 
@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 android:textColor="#e7e9eb"
-                android:textSize="15sp"
+                android:textSize="9sp"
                 style="@style/Oswald_SemiBoldFont"
                 android:text="TIME TO MURDER AND CREATE" />
 

@@ -54,24 +54,26 @@ class SelectCityFragment : RxBaseFragment(), View.OnClickListener {
     }
 
     override fun onClick(v: View) {
-        Utils.showLoading(activity)
+        if (v.id == R.id.itemCity) {
+            Utils.showLoading(activity)
 
-        val city = v.tag as CityModel
+            val city = v.tag as CityModel
 
-        val subscription = apiManager.putMe(city = city.id.toString()).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        { user ->
-                            Utils.saveObject(GlobalConstants.PREFS_USER, user)
+            val subscription = apiManager.putMe(city = city.id.toString()).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                            { user ->
+                                Utils.saveObject(GlobalConstants.PREFS_USER, user)
 
-                            Utils.hideLoading()
-                            (activity as WelcomeActivity).changeFragment(ArrivalDateFragment())
-                        },
-                        { e ->
-                            Utils.hideLoading()
-                            Utils.showToast(activity, "Network connection error.")
-                        }
-                )
-        subscriptions.add(subscription)
+                                Utils.hideLoading()
+                                (activity as WelcomeActivity).changeFragment(ArrivalDateFragment())
+                            },
+                            { e ->
+                                Utils.hideLoading()
+                                Utils.showToast(activity, "Network connection error.")
+                            }
+                    )
+            subscriptions.add(subscription)
+        }
     }
 }
 

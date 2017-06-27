@@ -64,6 +64,7 @@ class ArrivalDateFragment : RxBaseFragment(), View.OnClickListener {
                         .subscribe (
                                 { user ->
                                     Utils.saveObject(GlobalConstants.PREFS_USER, user)
+                                    Utils.saveData(GlobalConstants.PREFS_IS_USER_INITIALIZED, "true")
 
                                     Utils.hideLoading()
                                     (activity as WelcomeActivity).gotoNextActivity()

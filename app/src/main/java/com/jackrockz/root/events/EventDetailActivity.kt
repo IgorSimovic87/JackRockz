@@ -41,7 +41,7 @@ class EventDetailActivity : RxBaseActivity(), View.OnClickListener, OnMapReadyCa
         event = MyApplication.instance.currentEvent
 
         supportActionBar!!.title = event.venue.name
-        supportActionBar!!.subtitle = Utils.getStringFromTwoDates(event.start_date, event.end_date)
+        supportActionBar!!.subtitle = event.supplementary_subtitle
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         txtRegularPrice.paintFlags = txtRegularPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
@@ -95,14 +95,20 @@ class EventDetailActivity : RxBaseActivity(), View.OnClickListener, OnMapReadyCa
             txtVenueAddress.visibility = View.GONE
         }
 
+        initMap()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
         if (MyApplication.instance.currentUser.ambassador == null) {
             btnGet.text = "Unlock"
         } else if (event.is_sold_out) {
             btnGet.text = "Sold Out"
             btnGet.isClickable = false
+        } else {
+            btnGet.text = "Get on guestlist"
         }
-
-        initMap()
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -150,7 +156,7 @@ class EventDetailActivity : RxBaseActivity(), View.OnClickListener, OnMapReadyCa
 
         val cameraPosition = CameraPosition.Builder()
                 .target(position)
-                .zoom(13f)
+                .zoom(10f)
                 .build()
         p0.apply {
             addMarker(MarkerOptions().position(position).title(event.venue.name))

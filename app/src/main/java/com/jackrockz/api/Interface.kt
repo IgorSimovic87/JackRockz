@@ -20,6 +20,9 @@ interface JackApi {
     @GET("cities/{id}/events/{date}")
     fun getEvents(@Path("id") id: Int, @Path("date") date: Date, @Query("target_country") country: String): Call<EventsModel>
 
+    @GET("cities/{id}/featured_events")
+    fun getFeaturedEvents(@Path("id") id: Int, @Query("target_country") country: String): Call<EventsModel>
+
     @GET("ambassador/{code}")
     fun getAmbassadors(@Path("code") code: String): Call<AmbassadorsModel>
 

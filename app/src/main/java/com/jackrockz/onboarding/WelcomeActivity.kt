@@ -35,7 +35,7 @@ class WelcomeActivity : RxBaseActivity() {
     }
 
     fun InitFlow() {
-        if (AccessToken.getCurrentAccessToken() != null) {
+        if (Utils.loadData(GlobalConstants.PREFS_IS_USER_INITIALIZED) == "true" && AccessToken.getCurrentAccessToken() != null) {
             ProcessToken(AccessToken.getCurrentAccessToken().token, true)
             return
         }
@@ -68,7 +68,7 @@ class WelcomeActivity : RxBaseActivity() {
                             if (isLogged) {
                                 gotoNextActivity()
                             } else {
-                                changeFragment(SelectCountryFragment(), true)
+                                changeFragment(SelectCountryFragment())
                             }
                         },
                         { e ->
@@ -102,6 +102,7 @@ class WelcomeActivity : RxBaseActivity() {
 
     fun gotoNextActivity() {
         MyApplication.instance.currentUser = Utils.loadObject(GlobalConstants.PREFS_USER, UserModel::class.java)
+        MyApplication.instance.UpdateUserNotificationTags()
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()

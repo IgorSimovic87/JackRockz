@@ -22,19 +22,11 @@ class WelcomeFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         btnFacebook.setOnClickListener(this)
-        InitFlow()
     }
 
     override fun onClick(v: View) {
         if (v.id == R.id.btnFacebook) {
             LoginManager.getInstance().logInWithReadPermissions(activity, Arrays.asList("public_profile", "email"));
-        }
-    }
-
-    fun InitFlow() {
-        if (AccessToken.getCurrentAccessToken() != null) {
-            (activity as WelcomeActivity).gotoNextActivity()
-            return;
         }
     }
 

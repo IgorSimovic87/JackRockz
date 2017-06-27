@@ -109,8 +109,13 @@ class EventPaymentActivity : RxBaseActivity(), View.OnClickListener {
     }
 
     fun OnPurchase() {
+        if (txtPhone.text.isEmpty()) {
+            Utils.showAlertDialog(this, "Oops...", resources.getString(R.string.alert_phone))
+            return
+        }
+
         Utils.showLoading(this)
-        val subscription = apiManager.postPayment(event.id.toString(), event.id.toString(), "myapp://payments/{token}", quantity)
+        val subscription = apiManager.postPayment(event.id.toString(), event.id.toString(), "jackrockz://payments/{token}", quantity)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe (
                         { obj ->

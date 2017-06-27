@@ -97,6 +97,7 @@ class AmbassadorActivity : RxBaseActivity(), View.OnClickListener {
                                     .subscribe (
                                             { user ->
                                                 MyApplication.instance.currentUser = user
+                                                MyApplication.instance.UpdateUserNotificationTags()
                                                 Utils.saveObject(GlobalConstants.PREFS_USER, user)
 
                                                 Utils.hideLoading()

@@ -25,7 +25,7 @@ import kotlinx.android.synthetic.main.toolbar.view.*
 
 class MainActivity : RxBaseActivity() {
     @JvmField var navItemIndex = 0
-    @JvmField var CURRENT_TAG = "events"
+    @JvmField var CURRENT_TAG = "hot events"
     var mHandler: Handler = Handler()
 
     var activityTitles = arrayOf<String>()
@@ -51,12 +51,12 @@ class MainActivity : RxBaseActivity() {
 
         if (isFromPayment) {
             toolbar.imgLogo.visibility = View.GONE
-            navItemIndex = 1
+            navItemIndex = 2
             CURRENT_TAG = "my tickets"
             loadHomeFragment()
         } else if (savedInstanceState == null) {
             navItemIndex = 0
-            CURRENT_TAG = "events"
+            CURRENT_TAG = "hot events"
             loadHomeFragment()
         }
     }
@@ -68,10 +68,11 @@ class MainActivity : RxBaseActivity() {
     }
 
     fun getHomeFragment(): Fragment = when (navItemIndex) {
-        0 -> EventsFragment()
-        1 -> MyTicketsFragment()
-        2 -> SupportFragment()
-        else -> EventsFragment()
+        0 -> EventsFragment(true)
+        1 -> EventsFragment()
+        2 -> MyTicketsFragment()
+        3 -> SupportFragment()
+        else -> EventsFragment(true)
     }
 
     fun loadHomeFragment() {
@@ -99,19 +100,24 @@ class MainActivity : RxBaseActivity() {
         (nav_view.getHeaderView(0).findViewById(R.id.txtName) as TextView).text = MyApplication.instance.currentUser.first_name + " " + MyApplication.instance.currentUser.last_name
         nav_view.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.nav_events -> {
+                R.id.nav_hot_events -> {
                     navItemIndex = 0
+                    toolbar.imgLogo.visibility = View.VISIBLE
+                    CURRENT_TAG = "hot events"
+                }
+                R.id.nav_events -> {
+                    navItemIndex = 1
                     toolbar.imgLogo.visibility = View.VISIBLE
                     CURRENT_TAG = "events"
                 }
                 R.id.nav_mytickets -> {
-                    navItemIndex = 1
+                    navItemIndex = 2
                     toolbar.imgLogo.visibility = View.GONE
                     CURRENT_TAG = "my tickets"
                 }
                 R.id.nav_support -> {
                     toolbar.imgLogo.visibility = View.GONE
-                    navItemIndex = 2
+                    navItemIndex = 3
                     CURRENT_TAG = "support"
                 }
                 R.id.nav_code -> {

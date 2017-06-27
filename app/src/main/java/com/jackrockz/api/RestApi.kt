@@ -40,6 +40,7 @@ class RestApi {
     fun putMe(country: String?, city: String?, arrivalDate: Date?, departureDate: Date?, ambassadorID: String?) = jackApiHeader.putMe(country, city, arrivalDate, departureDate, ambassadorID)
     fun getCities() = jackApiHeader.getCities()
     fun getEvents(id: Int, date: Date, country: String) = jackApiHeader.getEvents(id, date, country)
+    fun getFeaturedEvents(id: Int, country: String) = jackApiHeader.getFeaturedEvents(id, country)
     fun getAmbassadors(code: String) = jackApiHeader.getAmbassadors(code)
     fun postPayment(id: String, eventID: String, url: String, quantity: Int?) = jackApiHeader.postPayment(id, eventID, url, quantity)
     fun getTickets() = jackApiHeader.getTickets()
